@@ -1,0 +1,48 @@
+﻿@using MakeYourMeal.Data.Models
+@model MakeYourMeal.ViewModels.FoodItemAndIgredientsViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FoodItem</h4>
+    <hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.Name)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Name)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.CategoryName)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.CategoryName)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Price)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Price)
+		</dd>
+	</dl>
+	<h3>Ingredients</h3>
+	<ul>
+		@foreach (var ing in Model.Ingredients)
+		{
+			<li> @ing.Name</li>
+		}
+	</ul>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Name }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
