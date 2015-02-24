@@ -30,6 +30,8 @@ ipch/
 [Dd]ebug*/
 [Rr]elease*/
 Ankh.NoLoad
+*.mdf
+*.ldf
 
 #MonoDevelop
 *.pidb
