@@ -12,7 +12,7 @@ namespace MakeYourMeal.Data.Models
 			OrderItems = new HashSet<OrderItem>();
 		}
 
-		[DatabaseGenerated(DatabaseGeneratedOption.None)]
+		[Key]
 		public int OrderId { get; set; }
 
 		[Required]

@@ -101,12 +101,12 @@ namespace MakeYourMeal.DAL.Infrastructure
 
 			modelBuilder.Entity<Ingredient>()
 				.HasMany(e => e.ExtraOrderItems)
-				.WithMany(e => e.Ingredients)
+				.WithMany(e => e.ExtraIngredients)
 				.Map(m => m.ToTable("ExtraIngredients").MapLeftKey("ExtraIngredients_Name").MapRightKey("ExtraOrderItems_OrderItemId"));
 
 			modelBuilder.Entity<Ingredient>()
 				.HasMany(e => e.WithoutOrderItems)
-				.WithMany(e => e.Ingredients1)
+				.WithMany(e => e.WithoutIngredients)
 				.Map(m => m.ToTable("WithoutIngredients").MapLeftKey("WithoutIngredients_Name").MapRightKey("WithoutOrderItems_OrderItemId"));
 
 			modelBuilder.Entity<OrderItem>()

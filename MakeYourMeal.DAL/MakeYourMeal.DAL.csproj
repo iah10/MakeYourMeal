@@ -123,6 +123,8 @@
     <Compile Include="Infrastructure\MakeYourMealEntities.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\FoodItemRepository.cs" />
+    <Compile Include="Repository\OrderItemRepository.cs" />
+    <Compile Include="Repository\OrderRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MakeYourMeal.Data\MakeYourMeal.Data.csproj">

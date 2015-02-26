@@ -27,13 +27,13 @@ namespace MakeYourMeal.Service.Services
 		}
 		public IEnumerable<FoodItem> GetAllFoodItems()
 		{
-			var alFoodItems = _foodItemRepository.GetAll();
-			return alFoodItems;
+			var allFoodItems = _foodItemRepository.GetAll();
+			return allFoodItems;
 		}
 
 		public FoodItem FindFoodItem(string foodItemName)
 		{
-			var item = _foodItemRepository.Get(f => f.Name == foodItemName);
+			var item = _foodItemRepository.GetById(foodItemName);
 			return item;
 		}
 

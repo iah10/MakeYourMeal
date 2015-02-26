@@ -8,12 +8,12 @@ namespace MakeYourMeal.Data.Models
 	{
 		public OrderItem()
 		{
-			Ingredients = new HashSet<Ingredient>();
+			ExtraIngredients = new HashSet<Ingredient>();
 			Orders = new HashSet<Order>();
-			Ingredients1 = new HashSet<Ingredient>();
+			WithoutIngredients = new HashSet<Ingredient>();
 		}
 
-		[DatabaseGenerated(DatabaseGeneratedOption.None)]
+		[Key]
 		public int OrderItemId { get; set; }
 
 		[Required]
@@ -21,10 +21,10 @@ namespace MakeYourMeal.Data.Models
 
 		public virtual FoodItem FoodItem { get; set; }
 
-		public virtual ICollection<Ingredient> Ingredients { get; set; }
+		public virtual ICollection<Ingredient> ExtraIngredients { get; set; }
 
 		public virtual ICollection<Order> Orders { get; set; }
 
-		public virtual ICollection<Ingredient> Ingredients1 { get; set; }
+		public virtual ICollection<Ingredient> WithoutIngredients { get; set; }
 	}
 }
