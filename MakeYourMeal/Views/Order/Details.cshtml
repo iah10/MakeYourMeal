@@ -1,0 +1,57 @@
+﻿@model MakeYourMeal.ViewModels.OrderViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>OrderViewModel</h4>
+    <hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.TableNumber)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.TableNumber)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.OrderTime)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.OrderTime)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.TotalCost)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.TotalCost)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.State)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.State)
+		</dd>
+	</dl>
+
+	<h3>Order Items</h3>
+	<ul>
+		@foreach (var ing in Model.OrderItems)
+		{
+			<li> @ing.FoodItemName</li>
+		}
+	</ul>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

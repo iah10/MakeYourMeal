@@ -8,8 +8,8 @@ namespace MakeYourMeal.DAL.Repository
 	/// </summary>
 	public class OrderItemRepository : RepositoryBase<OrderItem>, IOrderItemRepository
 	{
-		public OrderItemRepository()
-			: base(new MakeYourMealEntities())
+		public OrderItemRepository(MakeYourMealEntities dbContext)
+			: base(dbContext)
 		{
 
 		}

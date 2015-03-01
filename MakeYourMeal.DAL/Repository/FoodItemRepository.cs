@@ -8,7 +8,8 @@ namespace MakeYourMeal.DAL.Repository
 	/// </summary>
 	public class FoodItemRepository : RepositoryBase<FoodItem>, IFoodItemRepository
 	{
-		public FoodItemRepository(): base(new MakeYourMealEntities())
+		public FoodItemRepository(MakeYourMealEntities dbContext)
+			: base(dbContext)
 		{
 		}
 	}

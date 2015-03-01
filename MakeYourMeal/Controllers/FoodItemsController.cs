@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Web.Mvc;
 using MakeYourMeal.Data.Models;
+using MakeYourMeal.DAL.Infrastructure;
 using MakeYourMeal.Service.Services;
 using MakeYourMeal.ViewModels;
 
@@ -10,16 +11,18 @@ namespace MakeYourMeal.Controllers
 	{
 		/*---- Instance Variables ----*/
 
-		private readonly IFoodItemService _foodItemService = new FoodItemService();
+		private readonly IFoodItemService _foodItemService = new FoodItemService(new MakeYourMealEntities());
 
 		/*---------------------------*/
 
 		// GET: FoodItems
 		public ActionResult Index()
 		{
+			var a = this.HttpContext;
 			return View(_foodItemService.GetAllFoodItems());
 		}
 
+		
 		// GET: FoodItems/Details/name
 		public ActionResult Details(string id)
 		{

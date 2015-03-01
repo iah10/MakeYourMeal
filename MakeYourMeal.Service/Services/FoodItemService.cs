@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using MakeYourMeal.Data.Models;
+using MakeYourMeal.DAL.Infrastructure;
 using MakeYourMeal.DAL.Repository;
 
 namespace MakeYourMeal.Service.Services
@@ -21,9 +22,9 @@ namespace MakeYourMeal.Service.Services
 	{
 		private readonly IFoodItemRepository _foodItemRepository;
 
-		public FoodItemService()
+		public FoodItemService(MakeYourMealEntities dbContext)
 		{
-			_foodItemRepository = new FoodItemRepository();
+			_foodItemRepository = new FoodItemRepository(dbContext);
 		}
 		public IEnumerable<FoodItem> GetAllFoodItems()
 		{

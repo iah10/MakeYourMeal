@@ -5,7 +5,7 @@ using MakeYourMeal.Data.Models;
 namespace MakeYourMeal.DAL.Infrastructure
 {
 	/// <summary>
-	/// The Database Initilizer
+	/// The Database Initializer
 	/// </summary>
 	public class MakeYourMealDbInitializer : DropCreateDatabaseAlways<MakeYourMealEntities>
 	{

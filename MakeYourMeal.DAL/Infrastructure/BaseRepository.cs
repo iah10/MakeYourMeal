@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -26,7 +28,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 
 		protected MakeYourMealEntities DataContext
 		{
-			get { return _dataContext;  }
+			get { return _dataContext; }
 		}
 
 		public virtual void Add(T entity)
@@ -78,7 +80,27 @@ namespace MakeYourMeal.DAL.Infrastructure
 
 		public void Save()
 		{
-			_dataContext.SaveChanges();
+			try
+			{
+				_dataContext.SaveChanges();
+
+			}
+			catch (DbEntityValidationException e)
+			{
+				foreach (var eve in e.EntityValidationErrors)
+				{
+					Debug.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+						eve.Entry.Entity.GetType().Name, eve.Entry.State);
+					foreach (var ve in eve.ValidationErrors)
+					{
+						Debug.WriteLine("- Property: \"{0}\", Value: \"{1}\", Error: \"{2}\"",
+							ve.PropertyName,
+							eve.Entry.CurrentValues.GetValue<object>(ve.PropertyName),
+							ve.ErrorMessage);
+					}
+				}
+				throw;
+			}
 		}
 	}
 }

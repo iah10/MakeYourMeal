@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using MakeYourMeal.Data.Models;
+using MakeYourMeal.DAL.Infrastructure;
 using MakeYourMeal.DAL.Repository;
 
 namespace MakeYourMeal.Service.Services
@@ -24,9 +25,9 @@ namespace MakeYourMeal.Service.Services
 	{
 		private readonly IOrderItemRepository _orderItemRepository;
 
-		public OrderItemService()
+		public OrderItemService(MakeYourMealEntities dbContext)
 		{
-			_orderItemRepository = new OrderItemRepository();
+			_orderItemRepository = new OrderItemRepository(dbContext);
 		}
 
 		public IEnumerable<OrderItem> GetAllOrderItems()
@@ -56,7 +57,7 @@ namespace MakeYourMeal.Service.Services
 
 		public void AddNewOrderItem(OrderItem newOrderItem)
 		{
-			_orderItemRepository.Add(new OrderItem());
+			_orderItemRepository.Add(newOrderItem);
 			SaveOrderItem();
 		}
 

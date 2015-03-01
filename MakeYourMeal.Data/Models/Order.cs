@@ -15,7 +15,6 @@ namespace MakeYourMeal.Data.Models
 		[Key]
 		public int OrderId { get; set; }
 
-		[Required]
 		[MaxLength(8)]
 		[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
 		public byte[] OrderedAt { get; set; }

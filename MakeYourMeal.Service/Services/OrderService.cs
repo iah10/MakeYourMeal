@@ -1,15 +1,23 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using System.Web;
 using MakeYourMeal.Data.Models;
+using MakeYourMeal.DAL.Infrastructure;
 using MakeYourMeal.DAL.Repository;
 
 namespace MakeYourMeal.Service.Services
 {
 	public interface IOrderService
 	{
-		IEnumerable<Order> GetAllOrder();
+		IEnumerable<Order> GetAllOrders();
 		IEnumerable<OrderItem> GetOrderItemsForOrder(int orderId);
-		void AddNewOrder(Order newOrder);
+		Order GetOrderById(int orderId);
+		void AddOrderItemToOrder(int orderId, OrderItem orderItem);
+		int GetCurrentOrderId(HttpContextBase context);
+		void EmptyOrder(int orderId);
+		void CreateNewOrder(Order newOrder);
 		void UpdateOrder(Order order);
 		void DeleteOrder(int orderId);
 		void SaveOrder();
@@ -18,15 +26,33 @@ namespace MakeYourMeal.Service.Services
 	public class OrderService : IOrderService
 	{
 		private readonly IOrderRepository _orderRepository;
+		private readonly IOrderItemService _orderItemService;
+		public const string OrderSessionId = "OrderId";
 
-		public OrderService()
+		public OrderService(MakeYourMealEntities dbContext)
 		{
-			_orderRepository = new OrderRepository();
+			_orderRepository = new OrderRepository(dbContext);
+			_orderItemService = new OrderItemService(dbContext);
 		}
 
-		public IEnumerable<Order> GetAllOrder()
+		/// <summary>
+		/// During the application, there will always be a new order Id in the session.
+		/// </summary>
+		/// <returns></returns>
+		public int GetCurrentOrderId(HttpContextBase context)
 		{
-			_orderRepository.GetAll();
+			if (context.Session[OrderSessionId] == null)
+            {
+	                var newOrder = new Order();
+					CreateNewOrder(newOrder);
+                    context.Session[OrderSessionId] = newOrder.OrderId;
+            }
+            return Int32.Parse(context.Session[OrderSessionId].ToString());
+		}
+		
+		public IEnumerable<Order> GetAllOrders()
+		{
+			return _orderRepository.GetAll();
 		}
 
 		public IEnumerable<OrderItem> GetOrderItemsForOrder(int orderId)
@@ -35,7 +61,29 @@ namespace MakeYourMeal.Service.Services
 			return order.OrderItems.ToList();
 		}
 
-		public void AddNewOrder(Order newOrder)
+		public Order GetOrderById(int orderId)
+		{
+			return _orderRepository.GetById(orderId);
+		}
+
+		public void AddOrderItemToOrder(int orderId, OrderItem orderItem)
+		{
+			var order = GetOrderById(orderId);
+			_orderItemService.AddNewOrderItem(orderItem);
+			UpdateOrder(order);
+		}
+
+		public void EmptyOrder(int orderId)
+		{
+			var order = GetOrderById(orderId);
+			foreach (var orderItem in order.OrderItems)
+			{
+				_orderItemService.DeleteOrderItem(orderItem.OrderItemId);
+			}
+			UpdateOrder(order);
+		}
+
+		public void CreateNewOrder(Order newOrder)
 		{
 			_orderRepository.Add(newOrder);
 			SaveOrder();
@@ -49,7 +97,7 @@ namespace MakeYourMeal.Service.Services
 
 		public void DeleteOrder(int orderId)
 		{
-			var order = _orderRepository.GetById(orderId);
+			var order = GetOrderById(orderId);
 			_orderRepository.Delete(order);
 			SaveOrder();
 		}

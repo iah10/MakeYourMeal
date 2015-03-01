@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using MakeYourMeal.Data.Models;
 
 namespace MakeYourMeal.DAL.Infrastructure
@@ -39,6 +40,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
+			modelBuilder.Conventions.Remove<IncludeMetadataConvention>();
 
 			modelBuilder.Entity<FoodItemHasIngredient>()
 				.Property(e => e.FoodItemName)
@@ -121,10 +123,6 @@ namespace MakeYourMeal.DAL.Infrastructure
 				.Property(e => e.TotalCost)
 				.HasPrecision(10, 4);
 
-			modelBuilder.Entity<Order>()
-				.HasMany(e => e.OrderItems)
-				.WithMany(e => e.Orders)
-				.Map(m => m.ToTable("OrderHasOrderItems").MapLeftKey("Orders_OrderId").MapRightKey("OrderItems_OrderItemId"));
 		}
 	}
 }

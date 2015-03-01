@@ -8,7 +8,7 @@ namespace MakeYourMeal.DAL.Repository
 	/// </summary>
 	public class OrderRepository : RepositoryBase<Order>, IOrderRepository
 	{
-		public OrderRepository() :base(new MakeYourMealEntities())
+		public OrderRepository(MakeYourMealEntities dbContext) :base(dbContext)
 		{
 		
 		}
