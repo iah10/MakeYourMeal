@@ -12,6 +12,8 @@ namespace MakeYourMeal.Service.Services
 		IEnumerable<Ingredient> GetExtraIngredeintsForOrderItem(int orderItemId);
 		IEnumerable<Ingredient> GetWithoutIngredeintsForOrderItem(int orderItemId);
 		FoodItem GetFoodItemForOrderItem(int orderItemId);
+		void AddExtraIngredientForOrderItem(int orderItemId, string ingName);
+		void RemoveIngredientForOrderItem(int orderItemId, string ingName);
 		void AddNewOrderItem(OrderItem newOrderItem);
 		void UpdateOrderItem(OrderItem orderItem);
 		void DeleteOrderItem(int orderItemId);
@@ -24,10 +26,12 @@ namespace MakeYourMeal.Service.Services
 	public class OrderItemService : IOrderItemService
 	{
 		private readonly IOrderItemRepository _orderItemRepository;
+		private readonly IIngridientService _ingrdientService;
 
 		public OrderItemService(MakeYourMealEntities dbContext)
 		{
 			_orderItemRepository = new OrderItemRepository(dbContext);
+			_ingrdientService = new IngridientService(dbContext);
 		}
 
 		public IEnumerable<OrderItem> GetAllOrderItems()
@@ -53,6 +57,22 @@ namespace MakeYourMeal.Service.Services
 			var orderItem = _orderItemRepository.Get(o => o.OrderItemId == orderItemId);
 			var foodItem = orderItem.FoodItem;
 			return foodItem;
+		}
+
+		public void AddExtraIngredientForOrderItem(int orderItemId, string ingName)
+		{
+			var orderItem = _orderItemRepository.GetById(orderItemId);
+			var ingredient = _ingrdientService.FindIngredient(ingName);
+			orderItem.ExtraIngredients.Add(ingredient);
+			SaveOrderItem();
+		}
+
+		public void RemoveIngredientForOrderItem(int orderItemId, string ingName)
+		{
+			var orderItem = _orderItemRepository.GetById(orderItemId);
+			var ingredient = _ingrdientService.FindIngredient(ingName);
+			orderItem.WithoutIngredients.Add(ingredient);
+			SaveOrderItem();
 		}
 
 		public void AddNewOrderItem(OrderItem newOrderItem)

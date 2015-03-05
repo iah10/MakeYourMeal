@@ -15,6 +15,7 @@ namespace MakeYourMeal.Service.Services
 		IEnumerable<OrderItem> GetOrderItemsForOrder(int orderId);
 		Order GetOrderById(int orderId);
 		void AddOrderItemToOrder(int orderId, OrderItem orderItem);
+		void RemoverOrderItemFromOrder(int orderId, int orderItemId);
 		int GetCurrentOrderId(HttpContextBase context);
 		void EmptyOrder(int orderId);
 		void CreateNewOrder(Order newOrder);
@@ -64,6 +65,13 @@ namespace MakeYourMeal.Service.Services
 		public Order GetOrderById(int orderId)
 		{
 			return _orderRepository.GetById(orderId);
+		}
+
+		public void RemoverOrderItemFromOrder(int orderId, int orderItemId)
+		{
+			var order = GetOrderById(orderId);
+			_orderItemService.DeleteOrderItem(orderItemId);
+			UpdateOrder(order);
 		}
 
 		public void AddOrderItemToOrder(int orderId, OrderItem orderItem)

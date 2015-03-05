@@ -48,6 +48,9 @@
 		@foreach (var ing in Model.OrderItems)
 		{
 			<li> @ing.FoodItemName</li>
+			<span>@Html.ActionLink("Delete Order Item", "DeleteOrderItem", new {id = ing.OrderItemId})</span>
+			<span>@Html.ActionLink("Add Lettuce", "AddExtraIngredient", new { orderItem = ing.OrderItemId, ingName = "Lettuce" })</span>
+			<span>@Html.ActionLink("Remove Pickles", "RemoveIngredient", new { orderItem = ing.OrderItemId, ingName = "Mayonnaise" })</span>
 		}
 	</ul>
 </div>

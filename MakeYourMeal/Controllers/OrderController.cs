@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using MakeYourMeal.Data.Models;
 using MakeYourMeal.DAL.Infrastructure;
 using MakeYourMeal.Service.Services;
@@ -16,6 +12,7 @@ namespace MakeYourMeal.Controllers
 
 	    private static MakeYourMealEntities _context = new MakeYourMealEntities();
 		private IOrderService _orderService = new OrderService(_context);
+		private IOrderItemService _orderItemService = new OrderItemService(_context);
 		private IFoodItemService _foodItemService = new FoodItemService(_context);
 		 
         // GET: Order
@@ -104,25 +101,23 @@ namespace MakeYourMeal.Controllers
         }
 
         // GET: Order/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteOrderItem(int id)
         {
-            return View();
+			int orderId = _orderService.GetCurrentOrderId(this.HttpContext);
+			_orderService.RemoverOrderItemFromOrder(orderId, id);
+			return RedirectToAction("Index");
         }
 
-        // POST: Order/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+	    public ActionResult AddExtraIngredient(int orderItem, string ingName)
+	    {
+		    _orderItemService.AddExtraIngredientForOrderItem(orderItem, ingName);
+			return RedirectToAction("Index");
+	    }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+		public ActionResult RemoveIngredient(int orderItem, string ingName)
+		{
+			_orderItemService.RemoveIngredientForOrderItem(orderItem, ingName);
+			return RedirectToAction("Index");
+		}
     }
 }
