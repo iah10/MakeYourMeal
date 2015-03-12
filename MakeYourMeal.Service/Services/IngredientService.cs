@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using MakeYourMeal.Data.Models;
 using MakeYourMeal.DAL.Infrastructure;
 using MakeYourMeal.DAL.Repository;
@@ -19,11 +15,11 @@ namespace MakeYourMeal.Service.Services
 		void SaveIngredient();
 	}
 
-	public class IngridientService : IIngridientService
+	public class IngredientService : IIngridientService
 	{
 		private readonly IngredientRepository _ingredientRepository;
 
-		public IngridientService(MakeYourMealEntities dbContext)
+		public IngredientService(MakeYourMealEntities dbContext)
 		{
 			_ingredientRepository = new IngredientRepository(dbContext);
 		}

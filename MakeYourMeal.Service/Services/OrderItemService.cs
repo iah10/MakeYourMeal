@@ -31,7 +31,7 @@ namespace MakeYourMeal.Service.Services
 		public OrderItemService(MakeYourMealEntities dbContext)
 		{
 			_orderItemRepository = new OrderItemRepository(dbContext);
-			_ingrdientService = new IngridientService(dbContext);
+			_ingrdientService = new IngredientService(dbContext);
 		}
 
 		public IEnumerable<OrderItem> GetAllOrderItems()

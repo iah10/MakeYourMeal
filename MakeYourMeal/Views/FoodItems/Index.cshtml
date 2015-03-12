@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MakeYourMeal.Data.Models.FoodItem>
+﻿@model IEnumerable<MakeYourMeal.Data.Models.Category>
 
 @{
     ViewBag.Title = "Index";
@@ -14,31 +14,15 @@
         <th>
             @Html.DisplayNameFor(model => model.CategoryName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ImagePath)
-        </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.CategoryName)
+            @Html.ActionLink(item.CategoryName, "GetAllFoodItemsForCategory", new { category = item.CategoryName })
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImagePath)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Name }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Name }) |
-	        @Html.ActionLink("Delete", "Delete", new {id = item.Name}) |
-			@Html.ActionLink("Add To Order", "AddOrderItem", "Order", new {id=item.Name}, null)
+            @Html.ActionLink("Edit", "Edit", new { id = item.CategoryName })
         </td>
     </tr>
 }

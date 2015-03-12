@@ -44,7 +44,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 			{
 				Name = "Big Deluxe",
 				CategoryName = Category.CHARBROILED_BURGERS,
-				ImagePath = "no Path",
+				ImagePath = "BigDeluxe.jpg",
 				Price = new decimal(12.5)
 			};
 
@@ -83,7 +83,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				FoodItemName = "Big Deluxe",
 				IngredientName = "Cheese",
 				Quantity = 1,
-				Position = 3
+				Position = 4
 			};
 			context.FoodItemHasIngredients.Add(bigDeluxeAndCheese);
 
@@ -92,7 +92,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				FoodItemName = "Big Deluxe",
 				IngredientName = "Beef",
 				Quantity = 1,
-				Position = 4
+				Position = 5
 			};
 			context.FoodItemHasIngredients.Add(bigDeluxeAndBeef);
 
@@ -101,7 +101,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				FoodItemName = "Big Deluxe",
 				IngredientName = "Onion",
 				Quantity = 1,
-				Position = 5
+				Position = 6
 			};
 			context.FoodItemHasIngredients.Add(bigDeluxeAndOnion);
 
@@ -110,7 +110,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				FoodItemName = "Big Deluxe",
 				IngredientName = "Tomato",
 				Quantity = 1,
-				Position = 6
+				Position = 7
 			};
 			context.FoodItemHasIngredients.Add(bigDeluxeAndTomato);
 
@@ -119,7 +119,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				FoodItemName = "Big Deluxe",
 				IngredientName = "Lettuce",
 				Quantity = 1,
-				Position = 7
+				Position = 8
 			};
 			context.FoodItemHasIngredients.Add(bigDeluxeAndLettuce);
 
@@ -128,7 +128,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				FoodItemName = "Big Deluxe",
 				IngredientName = "Pickles",
 				Quantity = 1,
-				Position = 8
+				Position = 9
 			};
 			context.FoodItemHasIngredients.Add(bigDeluxeAndPickles);
 
@@ -137,7 +137,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				FoodItemName = "Big Deluxe",
 				IngredientName = "Mayonnaise",
 				Quantity = 1,
-				Position = 9
+				Position = 10
 			};
 			context.FoodItemHasIngredients.Add(bigDeluxeAndMayoLower);
 
@@ -146,7 +146,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				FoodItemName = "Big Deluxe",
 				IngredientName = "Heel Bun",
 				Quantity = 1,
-				Position = 10
+				Position = 11
 			};
 			context.FoodItemHasIngredients.Add(bigDeluxeAndHeelBun);
 
@@ -160,85 +160,85 @@ namespace MakeYourMeal.DAL.Infrastructure
 				{
 					Name = "Crown Bun",
 					AdditionalCharge = new decimal(0),
-					ImagePath = "no Path"
+					ImagePath = "CrownBun.jpg"
 				},
 				new Ingredient()
 				{
 					Name = "Heel Bun",
 					AdditionalCharge = new decimal(0),
-					ImagePath = "no Path"
+					ImagePath = "HeelBun.jpg"
 				},
 				new Ingredient()
 				{
 					Name = "Pickles",
 					AdditionalCharge = new decimal(0),
-					ImagePath = "no Path"
+					ImagePath = "Pickels.png"
 				},
 				new Ingredient()
 				{
 					Name = "Lettuce",
 					AdditionalCharge = new decimal(0),
-					ImagePath = "no Path"
+					ImagePath = "Lettuce.png"
 				},
 				new Ingredient()
 				{
 					Name = "Tomato",
 					AdditionalCharge = new decimal(0),
-					ImagePath = "no Path"
+					ImagePath = "Tomato.png"
 				},
 				new Ingredient()
 				{
 					Name = "Onion",
 					AdditionalCharge = new decimal(0),
-					ImagePath = "no Path"
+					ImagePath = "Onion.jpg"
 				},
 				new Ingredient()
 				{
 					Name = "Cheese",
 					AdditionalCharge = new decimal(0),
-					ImagePath = "no Path"
+					ImagePath = "Cheese.png"
 				},
 				new Ingredient()
 				{
 					Name = "Mayonnaise",
 					AdditionalCharge = new decimal(0),
-					ImagePath = "no Path"
+					ImagePath = "Mayonnaise.jpg"
 				},
 				new Ingredient()
 				{
 					Name = "Ketchup",
 					AdditionalCharge = new decimal(0),
-					ImagePath = "no Path"
+					ImagePath = "Ketchup.jpg"
 				},
 				new Ingredient()
 				{
 					Name = "Mustard",
 					AdditionalCharge = new decimal(0),
-					ImagePath = "no Path"
+					ImagePath = "Mustard.jpg"
 				},
 				new Ingredient()
 				{
 					Name = "Beef",
 					AdditionalCharge = new decimal(1),
-					ImagePath = "no Path"
+					ImagePath = "Beef.png"
 				},
 				new Ingredient()
 				{
 					Name = "Chicken Fillet",
 					AdditionalCharge = new decimal(1),
-					ImagePath = "no Path"
+					ImagePath = "ChickenFillet.jpg"
 				},
 				new Ingredient()
 				{
 					Name = "Grilled Chicken",
 					AdditionalCharge = new decimal(1),
-					ImagePath = "no Path"
+					ImagePath = "GrilledChicken.jpg"
 				},
 				new Ingredient()
 				{
 					Name = "Turkey",
 					AdditionalCharge = new decimal(1),
-					ImagePath = "no Path"
+					ImagePath = "Turkey.jpg"
 				}
 			};
 			ingredients.ForEach(ing => context.Ingredients.Add(ing));

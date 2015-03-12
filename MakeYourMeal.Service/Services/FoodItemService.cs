@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MakeYourMeal.Data.Models;
 using MakeYourMeal.DAL.Infrastructure;
@@ -9,6 +10,7 @@ namespace MakeYourMeal.Service.Services
 	public interface IFoodItemService
 	{
 		IEnumerable<FoodItem> GetAllFoodItems();
+		IEnumerable<FoodItem> GetFoodItemsForCategory(string category);
 		FoodItem FindFoodItem(string foodItemName);
 		IEnumerable<Ingredient> GetIngredientsForFoodItem(string fooItemName);
 		void AddNewFoodItem(FoodItem newFoodItem);
@@ -32,6 +34,12 @@ namespace MakeYourMeal.Service.Services
 			return allFoodItems;
 		}
 
+		public IEnumerable<FoodItem> GetFoodItemsForCategory(string category)
+		{
+			var foodItems = _foodItemRepository.GetMany(f => f.CategoryName == category);
+			return foodItems;
+		}
+
 		public FoodItem FindFoodItem(string foodItemName)
 		{
 			var item = _foodItemRepository.GetById(foodItemName);
@@ -40,10 +48,20 @@ namespace MakeYourMeal.Service.Services
 
 		public IEnumerable<Ingredient> GetIngredientsForFoodItem(string foodItemName)
 		{
-			var ingredients = new List<Ingredient>();
 			var item = FindFoodItem(foodItemName);
-			ingredients.AddRange(item.FoodItemHasIngredients.Select(foodItemHasIngredient => foodItemHasIngredient.Ingredient));
-			return ingredients;
+			var ingredients = item.FoodItemHasIngredients;
+			var sortedIng = sortIngredients(ingredients);
+			return sortedIng;
+		}
+
+		private IEnumerable<Ingredient> sortIngredients(ICollection<FoodItemHasIngredient> foodItemHasIngredients)
+		{
+			SortedList<Int32, Ingredient> ingredients = new SortedList<Int32, Ingredient>();
+			foreach (var fHasIng in foodItemHasIngredients)
+			{
+				ingredients.Add(fHasIng.Position, fHasIng.Ingredient);
+			}
+			return ingredients.Values;
 		}
 
 		public void AddNewFoodItem(FoodItem newFoodItem)

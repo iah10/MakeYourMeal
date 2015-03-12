@@ -11,15 +11,18 @@ namespace MakeYourMeal.Controllers
 	{
 		/*---- Instance Variables ----*/
 
-		private readonly IFoodItemService _foodItemService = new FoodItemService(new MakeYourMealEntities());
+		private static MakeYourMealEntities _context = new MakeYourMealEntities();
+		private readonly IFoodItemService _foodItemService = new FoodItemService(_context);
+		private readonly ICategoryService _categoryService = new CategoryService(_context);
 
 		/*---------------------------*/
 
 		// GET: FoodItems
 		public ActionResult Index()
 		{
-			var a = this.HttpContext;
-			return View(_foodItemService.GetAllFoodItems());
+			var a = HttpContext;
+			var categories = _categoryService.GetAllCategories();
+			return View(categories);
 		}
 
 		
@@ -110,6 +113,12 @@ namespace MakeYourMeal.Controllers
 		{
 			var foodItem = _foodItemService.FindFoodItem(id);
 			_foodItemService.DeleteFoodItem(id);
+			return RedirectToAction("Index");
+		}
+
+		public ActionResult GetAllFoodItemsForCategory(string category)
+		{
+			var foodItems = _foodItemService.GetFoodItemsForCategory(category);
 			return RedirectToAction("Index");
 		}
 	}

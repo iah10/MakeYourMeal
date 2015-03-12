@@ -3,42 +3,58 @@
 
 @{
     ViewBag.Title = "Details";
+	string path = "/Images/";
 }
 
 <h2>Details</h2>
-
 <div>
     <h4>FoodItem</h4>
-    <hr />
-	<dl class="dl-horizontal">
-		<dt>
-			@Html.DisplayNameFor(model => model.Name)
-		</dt>
+	<hr/>
 
-		<dd>
-			@Html.DisplayFor(model => model.Name)
-		</dd>
-		<dt>
-			@Html.DisplayNameFor(model => model.CategoryName)
-		</dt>
+	@{
+		var imagePath = path + Model.ImagePath;
+		<div style=" float:left"><img src="@imagePath" alt="@Model.Name" /></div>
+	}
 
-		<dd>
-			@Html.DisplayFor(model => model.CategoryName)
-		</dd>
+	<div style="float:right">
+		<dl class="dl-horizontal">
 
-		<dt>
-			@Html.DisplayNameFor(model => model.Price)
-		</dt>
+			<dt>
+				@Html.DisplayNameFor(model => model.Name)
+			</dt>
 
-		<dd>
-			@Html.DisplayFor(model => model.Price)
-		</dd>
-	</dl>
-	<h3>Ingredients</h3>
-	<ul>
+			<dd>
+				@Html.DisplayFor(model => model.Name)
+			</dd>
+			<dt>
+				@Html.DisplayNameFor(model => model.CategoryName)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.CategoryName)
+			</dd>
+
+			<dt>
+				@Html.DisplayNameFor(model => model.Price)
+			</dt>
+
+			<dd>
+				@Html.DisplayFor(model => model.Price)
+			</dd>
+
+
+		</dl>
+	</div>
+
+	<h3 style="clear:left">Ingredients</h3>
+	<ul style="clear: left; list-style-type: none;">
 		@foreach (var ing in Model.Ingredients)
 		{
-			<li> @ing.Name</li>
+			var ingImgPath = path + ing.ImagePath;
+			<li>
+				<img src="@ingImgPath" alt="@ing.Name" />
+			</li>
+
 		}
 	</ul>
 </div>
