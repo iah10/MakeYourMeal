@@ -1,0 +1,9 @@
+﻿@using MakeYourMeal.Data.Models
+@model IEnumerable<MakeYourMeal.Data.Models.FoodItem>
+
+<ul>
+	@foreach (FoodItem food in Model)
+	{
+		<li>@food.Name</li>
+	}
+</ul>

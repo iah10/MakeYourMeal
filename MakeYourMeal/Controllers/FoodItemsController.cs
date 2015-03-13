@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System.EnterpriseServices;
+using System.Linq;
+using System.Net;
 using System.Web.Mvc;
 using MakeYourMeal.Data.Models;
 using MakeYourMeal.DAL.Infrastructure;
@@ -20,12 +22,11 @@ namespace MakeYourMeal.Controllers
 		// GET: FoodItems
 		public ActionResult Index()
 		{
-			var a = HttpContext;
 			var categories = _categoryService.GetAllCategories();
 			return View(categories);
 		}
 
-		
+
 		// GET: FoodItems/Details/name
 		public ActionResult Details(string id)
 		{
@@ -119,7 +120,7 @@ namespace MakeYourMeal.Controllers
 		public ActionResult GetAllFoodItemsForCategory(string category)
 		{
 			var foodItems = _foodItemService.GetFoodItemsForCategory(category);
-			return RedirectToAction("Index");
+			return PartialView("_FoodItems", foodItems);
 		}
 	}
 }

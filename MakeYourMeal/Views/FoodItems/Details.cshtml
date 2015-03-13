@@ -2,63 +2,60 @@
 @model MakeYourMeal.ViewModels.FoodItemAndIgredientsViewModel
 
 @{
-    ViewBag.Title = "Details";
-	string path = "/Images/";
+	ViewBag.Title = "Details";
+	const string path = "/Images/";
 }
 
 <h2>Details</h2>
-<div>
-    <h4>FoodItem</h4>
-	<hr/>
+<hr />
 
-	@{
-		var imagePath = path + Model.ImagePath;
-		<div style=" float:left"><img src="@imagePath" alt="@Model.Name" /></div>
-	}
+@{
+	var imagePath = path + Model.ImagePath;
+	<div style=" float:left"><img src="@imagePath" alt="@Model.Name" /></div>
+}
 
-	<div style="float:right">
-		<dl class="dl-horizontal">
+<div style="float:right">
+	<dl class="dl-horizontal">
 
-			<dt>
-				@Html.DisplayNameFor(model => model.Name)
-			</dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.Name)
+		</dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.Name)
-			</dd>
-			<dt>
-				@Html.DisplayNameFor(model => model.CategoryName)
-			</dt>
+		<dd>
+			@Html.DisplayFor(model => model.Name)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.CategoryName)
+		</dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.CategoryName)
-			</dd>
+		<dd>
+			@Html.DisplayFor(model => model.CategoryName)
+		</dd>
 
-			<dt>
-				@Html.DisplayNameFor(model => model.Price)
-			</dt>
+		<dt>
+			@Html.DisplayNameFor(model => model.Price)
+		</dt>
 
-			<dd>
-				@Html.DisplayFor(model => model.Price)
-			</dd>
+		<dd>
+			@Html.DisplayFor(model => model.Price)
+		</dd>
 
 
-		</dl>
-	</div>
-
-	<h3 style="clear:left">Ingredients</h3>
-	<ul style="clear: left; list-style-type: none;">
-		@foreach (var ing in Model.Ingredients)
-		{
-			var ingImgPath = path + ing.ImagePath;
-			<li>
-				<img src="@ingImgPath" alt="@ing.Name" />
-			</li>
-
-		}
-	</ul>
+	</dl>
 </div>
+
+<h3 style="clear:left">Ingredients</h3>
+<ul style="clear: left; list-style-type: none;">
+	@foreach (var ing in Model.Ingredients)
+	{
+		var ingImgPath = path + ing.ImagePath;
+		<li>
+			<img src="@ingImgPath" alt="@ing.Name" />
+		</li>
+
+	}
+</ul>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Name }) |
-    @Html.ActionLink("Back to List", "Index")
+	@Html.ActionLink("Edit", "Edit", new { id = Model.Name }) |
+	@Html.ActionLink("Back to List", "Index")
 </p>

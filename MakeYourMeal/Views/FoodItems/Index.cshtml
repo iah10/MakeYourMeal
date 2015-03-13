@@ -1,30 +1,49 @@
 ﻿@model IEnumerable<MakeYourMeal.Data.Models.Category>
 
 @{
-    ViewBag.Title = "Index";
+	ViewBag.Title = "Index";
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+	@Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CategoryName)
-        </th>
-    </tr>
+	<tr>
+		<th>
+			@Html.DisplayNameFor(model => model.CategoryName)
+		</th>
+	</tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink(item.CategoryName, "GetAllFoodItemsForCategory", new { category = item.CategoryName })
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.CategoryName })
-        </td>
-    </tr>
-}
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td class="updatePage" data-id="@item.CategoryName">
+				@item.CategoryName
+			</td>
+		</tr>
+	}
 
 </table>
+
+<div id="FoodItems">
+</div>
+
+@section scripts
+{
+	<script type="text/javascript">
+		$(function () {
+			$(".updatePage").click(function () {
+				//get the category id
+				var category = $(this).attr("data-id");
+				// Perform the ajax call
+				$.post("/FoodItems/GetAllFoodItemsForCategory/", { "category": category },
+					function (data) {
+						//Fill div with results
+						$("#FoodItems").html(data);
+					});
+			});
+		});
+	</script>
+}
