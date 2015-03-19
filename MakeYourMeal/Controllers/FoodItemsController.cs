@@ -41,7 +41,7 @@ namespace MakeYourMeal.Controllers
 			}
 			var ingredientsForFoodItem = _foodItemService.GetIngredientsForFoodItem(foodItem.Name);
 			var foodItemVm = new FoodItemAndIgredientsViewModel(foodItem, ingredientsForFoodItem);
-			return View(foodItemVm);
+			return PartialView("_Details", foodItemVm);
 		}
 
 		// GET: FoodItems/Create

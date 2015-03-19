@@ -194,6 +194,7 @@
     <Compile Include="ViewModels\OrderViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-glyphicons.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -203,12 +204,10 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\Beef.png" />
-    <Content Include="Images\BigDeluxe.jpg" />
+    <Content Include="Images\BigDeluxe_small.jpg" />
     <Content Include="Images\Cheese.png" />
     <Content Include="Images\ChickenFillet.jpg" />
-    <Content Include="Images\CrownBun.jpg" />
     <Content Include="Images\GrilledChicken.jpg" />
-    <Content Include="Images\HeelBun.jpg" />
     <Content Include="Images\Ketchup.jpg" />
     <Content Include="Images\Lettuce.png" />
     <Content Include="Images\Mayonnaise.jpg" />
@@ -228,9 +227,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-2.0.2.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -279,7 +278,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\FoodItems\Create.cshtml" />
     <Content Include="Views\FoodItems\Delete.cshtml" />
-    <Content Include="Views\FoodItems\Details.cshtml" />
+    <Content Include="Views\FoodItems\_Details.cshtml" />
     <Content Include="Views\FoodItems\Edit.cshtml" />
     <Content Include="Views\FoodItems\Index.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
