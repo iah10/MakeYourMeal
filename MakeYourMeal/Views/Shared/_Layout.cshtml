@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
+<head style="overflow: auto">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
@@ -29,16 +29,15 @@
             </div>
         </div>
     </div>
-	<div class="container body-content">
+	<div class="body-content">
 		@RenderBody()
-		<hr />
-		<footer>
-			<p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-		</footer>
+		@*<footer>
+			  <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+		  </footer>*@
 	</div>
 
-    @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/jquery")
+	@Scripts.Render("~/bundles/bootstrap")
 	@Scripts.Render("~/bundles/jqueryunob")
     @RenderSection("scripts", required: false)
 </body>

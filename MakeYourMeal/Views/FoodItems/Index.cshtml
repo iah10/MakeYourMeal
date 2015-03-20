@@ -4,44 +4,52 @@
 	ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div id="wrapper">
+	<div id="sidebar-wrapper" class="panel-group list-group">
+		<ul class="sidebar-nav">
+			@foreach (var item in Model)
+			{
+				string demoName = "demo" + item.CategoryName.Replace(" ", string.Empty);
+				string demoId = "#" + demoName;
+				<li class="sidebar-brand">
+					<a href="@demoId" data-toggle="collapse" data-parent="#Wrapper">@item.CategoryName</a>
+				</li>
+				<li class="collapse" id="@demoName">
 
-<p>
-	@Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-	<tr>
-		<th>
-			@Html.DisplayNameFor(model => model.CategoryName)
-		</th>
-	</tr>
+					@foreach (var subitem in item.FoodItems)
+					{
+						<a class="updatePage" id=@Uri.EscapeUriString(subitem.Name)>@subitem.Name</a>
+					}
+				</li>
+			}
+		</ul>
+	</div>
 
-	@foreach (var item in Model)
-	{
-		<tr>
-			<td class="updatePage" data-id="@item.CategoryName">
-				@item.CategoryName
-			</td>
-		</tr>
-	}
+	<div id="page-content-wrapper" class="panel-body">
 
-</table>
-
-<div id="FoodItems">
+	</div>
 </div>
 
 @section scripts
 {
+	<script>
+		$("#menu-toggle").click(function (e) {
+			e.preventDefault();
+			$("#wrapper").toggleClass("toggled");
+		});
+	</script>
+
 	<script type="text/javascript">
 		$(function () {
 			$(".updatePage").click(function () {
 				//get the category id
-				var category = $(this).attr("data-id");
+				var id = $(this).attr("id");
+				var url = "/FoodItems/Details/" + id;
 				// Perform the ajax call
-				$.post("/FoodItems/GetAllFoodItemsForCategory/", { "category": category },
+				$.post(url,
 					function (data) {
 						//Fill div with results
-						$("#FoodItems").html(data);
+						$("#page-content-wrapper").html(data);
 					});
 			});
 		});

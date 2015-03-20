@@ -44,7 +44,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 			{
 				Name = "Big Deluxe",
 				CategoryName = Category.CHARBROILED_BURGERS,
-				ImagePath = "BigDeluxe.jpg",
+				ImagePath = "BigDeluxe_small.jpg",
 				Price = new decimal(12.5)
 			};
 

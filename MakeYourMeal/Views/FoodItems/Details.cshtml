@@ -61,19 +61,17 @@
 	@Html.ActionLink("Back to List", "Index")
 </p>
 
-@section scripts
-{
-	<script>
-		$(function () {
-			$('.addToOrder').click(function () {
-				//var foodItem = @Uri.EscapeUriString(Model.Name);
-				var url = "/Order/AddOrderItem/@Uri.EscapeUriString(Model.Name)";
-				$.post(url, function (data) {
-					//Fill div with results
-					//$("#FoodItems").html(data);
-					alert("la la");
-				});
+<script>
+	$(function () {
+		$('.addToOrder').click(function () {
+			//var foodItem = @Uri.EscapeUriString(Model.Name);
+			var url = "/Order/AddOrderItem/@Uri.EscapeUriString(Model.Name)";
+			$.post(url, function (data) {
+				//Fill div with results
+				//$("#FoodItems").html(data);
+				//alert("la la");
+				console.log("2akal");
 			});
 		});
-	</script>
-}
+	});
+</script>
