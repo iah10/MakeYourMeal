@@ -160,13 +160,13 @@ namespace MakeYourMeal.DAL.Infrastructure
 				{
 					Name = "Crown Bun",
 					AdditionalCharge = new decimal(0),
-					ImagePath = "CrownBun.jpg"
+					ImagePath = "CrownBun.png"
 				},
 				new Ingredient()
 				{
 					Name = "Heel Bun",
 					AdditionalCharge = new decimal(0),
-					ImagePath = "HeelBun.jpg"
+					ImagePath = "HeelBun.png"
 				},
 				new Ingredient()
 				{
@@ -202,7 +202,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				{
 					Name = "Mayonnaise",
 					AdditionalCharge = new decimal(0),
-					ImagePath = "Mayonnaise.jpg"
+					ImagePath = "Mayonnaise.png"
 				},
 				new Ingredient()
 				{
