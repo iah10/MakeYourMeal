@@ -296,7 +296,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\FoodItems\Create.cshtml" />
     <Content Include="Views\FoodItems\Delete.cshtml" />
-    <Content Include="Views\FoodItems\_Details.cshtml" />
+    <Content Include="Views\FoodItems\Details.cshtml" />
     <Content Include="Views\FoodItems\Edit.cshtml" />
     <Content Include="Views\FoodItems\Index.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
