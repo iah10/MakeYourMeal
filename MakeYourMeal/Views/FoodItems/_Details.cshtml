@@ -1,0 +1,67 @@
+﻿@using System.Configuration
+@using System.Web.UI.WebControls
+@using MakeYourMeal.Data.Models
+@model MakeYourMeal.ViewModels.FoodItemAndIgredientsViewModel
+
+@{
+	ViewBag.Title = "Details";
+	const string path = "/Images/";
+}
+
+<h2>
+	<span class="floatL">Details</span>
+
+	@{
+		var imagePath = path + Model.ImagePath;
+		<div class="floatL"><img src="@imagePath" alt="@Model.Name" /></div>
+	}
+</h2>
+
+<div class="floatL">
+	<dl class="dl-horizontal">
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Name)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Name)
+		</dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.CategoryName)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.CategoryName)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Price)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Price)
+		</dd>
+
+
+	</dl>
+</div>
+
+
+<hr class="clearB"/>
+
+<h2 class="clearB text-center">Ingredients</h2>
+<ul class="media-list media-middle text-center">
+	@foreach (var ing in Model.Ingredients)
+	{
+		var ingImgPath = path + ing.ImagePath;
+		<li class="media-object">
+			<img src="@ingImgPath" alt="@ing.Name" />
+		</li>
+
+	}
+</ul>
+<p>
+	@Html.ActionLink("Edit", "Edit", new {id = Model.Name}) |
+	@Html.ActionLink("Back to List", "Index")
+</p>
