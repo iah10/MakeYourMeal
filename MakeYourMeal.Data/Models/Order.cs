@@ -10,14 +10,14 @@ namespace MakeYourMeal.Data.Models
 		public Order()
 		{
 			OrderItems = new HashSet<OrderItem>();
+			OrderedAt = DateTime.Now;
 		}
 
 		[Key]
 		public int OrderId { get; set; }
 
-		[MaxLength(8)]
-		[DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-		public byte[] OrderedAt { get; set; }
+		
+		public DateTime OrderedAt { get; set; }
 
 		public int TableNumber { get; set; }
 

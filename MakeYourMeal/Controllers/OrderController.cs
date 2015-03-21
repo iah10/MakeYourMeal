@@ -29,13 +29,14 @@ namespace MakeYourMeal.Controllers
 		// GET: Order/Details/5
 		public ActionResult Details(int id)
 		{
-			int orderId = _orderService.GetCurrentOrderId(this.HttpContext);
-			Order currentOrder = _orderService.GetOrderById(orderId);
+			//int orderId = _orderService.GetCurrentOrderId(this.HttpContext);
+			Order currentOrder = _orderService.GetOrderById(id);
 			OrderViewModel viewModel = new OrderViewModel
 			{
 				TableNumber = currentOrder.TableNumber,
 				OrderItems = currentOrder.OrderItems,
 				State = currentOrder.State,
+				OrderTime = currentOrder.OrderedAt,
 				TotalCost = currentOrder.TotalCost
 			};
 			return View(viewModel);

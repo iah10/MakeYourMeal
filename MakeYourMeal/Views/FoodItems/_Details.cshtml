@@ -42,7 +42,8 @@
 		<dd>
 			@Html.DisplayFor(model => model.Price)
 		</dd>
-
+		<dt> Add To Order</dt>
+		<dd> <button type="button" class="btn btn-default addToOrder">Add To Order</button> </dd>
 
 	</dl>
 </div>
@@ -65,3 +66,18 @@
 	@Html.ActionLink("Edit", "Edit", new {id = Model.Name}) |
 	@Html.ActionLink("Back to List", "Index")
 </p>
+
+<script>
+	$(function () {
+		$('.addToOrder').click(function () {
+			//var foodItem = @Uri.EscapeUriString(Model.Name);
+			var url = "/Order/AddOrderItem/@Uri.EscapeUriString(Model.Name)";
+			$.post(url, function (data) {
+				//Fill div with results
+				//$("#FoodItems").html(data);
+				//alert("la la");
+				console.log("2akal");
+			});
+		});
+	});
+</script>

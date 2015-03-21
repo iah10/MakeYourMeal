@@ -116,10 +116,6 @@ namespace MakeYourMeal.DAL.Infrastructure
 				.IsVariableLength();
 
 			modelBuilder.Entity<Order>()
-				.Property(e => e.OrderedAt)
-				.IsVariableLength();
-
-			modelBuilder.Entity<Order>()
 				.Property(e => e.TotalCost)
 				.HasPrecision(10, 4);
 
