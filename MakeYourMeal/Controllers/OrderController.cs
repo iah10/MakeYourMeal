@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net;
 using System.Web.Mvc;
 using MakeYourMeal.Data.Models;
 using MakeYourMeal.DAL.Infrastructure;
@@ -13,6 +12,7 @@ namespace MakeYourMeal.Controllers
 	//[Authorize]
 	public class OrderController : Controller
 	{
+		/*---- Instance Variables ----*/
 
 		private static readonly MakeYourMealEntities _context = new MakeYourMealEntities();
 		private readonly IOrderService _orderService = new OrderService(_context);
@@ -20,34 +20,15 @@ namespace MakeYourMeal.Controllers
 		private readonly IFoodItemService _foodItemService = new FoodItemService(_context);
 		protected readonly Lazy<IHubContext> AdminHub = new Lazy<IHubContext>(() => GlobalHost.ConnectionManager.GetHubContext<AdminHub>());
 
+		/*--------------------------*/
+
 		// GET: Order
 		public ActionResult Index()
 		{
-			return View(_orderService.GetAllOrders());
+			var orders = _orderService.GetTodayCommitedOrders();
+			return View(orders);
 		}
 
-		// GET: Order/Details/5
-		public ActionResult Details(int id)
-		{
-			//int orderId = _orderService.GetCurrentOrderId(this.HttpContext);
-			Order currentOrder = _orderService.GetOrderById(id);
-			OrderViewModel viewModel = new OrderViewModel
-			{
-				TableNumber = currentOrder.TableNumber,
-				OrderItems = currentOrder.OrderItems,
-				State = currentOrder.State,
-				OrderTime = currentOrder.OrderedAt,
-				TotalCost = currentOrder.TotalCost
-			};
-			return View(viewModel);
-		}
-
-		/// <summary>
-		/// When the user drags a food item to the plate. this method is invoked.
-		/// We retrieve the food item name and create an order item and add it to the order
-		/// </summary>
-		/// <param name="id">Food Item Id</param>
-		/// <returns></returns>
 		public ActionResult AddOrderItem(string id)
 		{
 			int orderId = _orderService.GetCurrentOrderId(this.HttpContext);
@@ -59,52 +40,33 @@ namespace MakeYourMeal.Controllers
 				OrderId = orderId
 			};
 			_orderService.AddOrderItemToOrder(orderId, newItem);
-			AdminHub.Value.Clients.All.orderReceived();
 			return Json(true, JsonRequestBehavior.AllowGet);
 		}
 
-		// GET: Order/Create
-		public ActionResult Create()
+		//Used by regular users
+		public ActionResult MyOrder()
 		{
-			return View();
+			int currentOrderId = _orderService.GetCurrentOrderId(this.HttpContext);
+			Order currentOrder = _orderService.GetOrderById(currentOrderId);
+			OrderViewModel viewModel = GetOrderViewModelForOrder(currentOrder);
+			return View(viewModel);
 		}
 
-		// POST: Order/Create
-		[HttpPost]
-		public ActionResult Create(FormCollection collection)
+		public ActionResult CommitOrder()
 		{
-			try
-			{
-				// TODO: Add insert logic here
-
-				return RedirectToAction("Index");
-			}
-			catch
-			{
-				return View();
-			}
+			int currentOrderId = _orderService.GetCurrentOrderId(this.HttpContext);
+			Order currentOrder = _orderService.GetOrderById(currentOrderId);
+			_orderService.ChangeOrderState(currentOrder, OrderState.COMITED_STATE);
+			AdminHub.Value.Clients.All.orderReceived();
+			return RedirectToAction("Index", "FoodItems");
 		}
 
-		// GET: Order/Edit/5
-		public ActionResult Edit(int id)
+		//used by cashier
+		public ActionResult OrderDetails(int id)
 		{
-			return View();
-		}
-
-		// POST: Order/Edit/5
-		[HttpPost]
-		public ActionResult Edit(int id, FormCollection collection)
-		{
-			try
-			{
-				// TODO: Add update logic here
-
-				return RedirectToAction("Index");
-			}
-			catch
-			{
-				return View();
-			}
+			Order currentOrder = _orderService.GetOrderById(id);
+			OrderViewModel viewModel  = GetOrderViewModelForOrder(currentOrder);
+			return View("OrderDetails",viewModel);
 		}
 
 		// GET: Order/Delete/5
@@ -118,6 +80,9 @@ namespace MakeYourMeal.Controllers
 		public ActionResult AddExtraIngredient(int orderItem, string ingName)
 		{
 			_orderItemService.AddExtraIngredientForOrderItem(orderItem, ingName);
+			int orderId = _orderService.GetCurrentOrderId(this.HttpContext);
+			Order cuurentOrder = _orderService.GetOrderById(orderId);
+			_orderService.CalculateTotalCost(cuurentOrder);
 			return RedirectToAction("Index");
 		}
 
@@ -125,6 +90,19 @@ namespace MakeYourMeal.Controllers
 		{
 			_orderItemService.RemoveIngredientForOrderItem(orderItem, ingName);
 			return RedirectToAction("Index");
+		}
+
+		private OrderViewModel GetOrderViewModelForOrder(Order order)
+		{
+			OrderViewModel viewModel = new OrderViewModel
+			{
+				TableNumber = order.TableNumber,
+				OrderItems = order.OrderItems,
+				State = order.OrderState.State,
+				OrderTime = order.OrderedAt,
+				TotalCost = order.TotalCost
+			};
+			return viewModel;
 		}
 	}
 }

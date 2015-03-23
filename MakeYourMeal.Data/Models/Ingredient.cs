@@ -18,8 +18,7 @@ namespace MakeYourMeal.Data.Models
 
 		public string ImagePath { get; set; }
 
-		[Column(TypeName = "smallmoney")]
-		public decimal? AdditionalCharge { get; set; }
+		public decimal AdditionalCharge { get; set; }
 
 		public virtual ICollection<FoodItemHasIngredient> FoodItemHasIngredients { get; set; }
 

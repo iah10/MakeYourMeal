@@ -20,8 +20,7 @@ namespace MakeYourMeal.Data.Models
 		public string CategoryName { get; set; }
 
 		[Required]
-		[Column(TypeName = "smallmoney")]
-		public decimal? Price { get; set; }
+		public decimal Price { get; set; }
 
 		[Required]
 		public string ImagePath { get; set; }

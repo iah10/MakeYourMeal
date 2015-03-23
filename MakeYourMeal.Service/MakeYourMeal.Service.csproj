@@ -113,6 +113,7 @@
     <Compile Include="Services\IngredientService.cs" />
     <Compile Include="Services\OrderItemService.cs" />
     <Compile Include="Services\OrderService.cs" />
+    <Compile Include="Services\OrderStateService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MakeYourMeal.DAL\MakeYourMeal.DAL.csproj">

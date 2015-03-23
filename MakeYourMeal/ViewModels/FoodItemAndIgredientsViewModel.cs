@@ -27,7 +27,6 @@ namespace MakeYourMeal.ViewModels
 
 		public decimal? Price { get; set; }
 
-		[Display(Name = "Item Image")]
 		public string ImagePath { get; set; }
 
 		public IEnumerable<Ingredient> Ingredients { get; set; } 

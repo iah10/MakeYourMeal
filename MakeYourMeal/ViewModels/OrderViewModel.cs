@@ -23,7 +23,7 @@ namespace MakeYourMeal.ViewModels
 
 		public decimal TotalCost { get; set; }
 
-		public int State { get; set; }
+		public string State { get; set; }
 
 		public  IEnumerable<OrderItem> OrderItems { get; set; }
 	}

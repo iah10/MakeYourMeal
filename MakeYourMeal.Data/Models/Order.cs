@@ -16,14 +16,15 @@ namespace MakeYourMeal.Data.Models
 		[Key]
 		public int OrderId { get; set; }
 
+		public string State { get; set; }
 		
 		public DateTime OrderedAt { get; set; }
 
 		public int TableNumber { get; set; }
 
 		public decimal TotalCost { get; set; }
-
-		public int State { get; set; }
+		[ForeignKey("State")]
+		public virtual OrderState OrderState { get; set; }
 
 		public virtual ICollection<OrderItem> OrderItems { get; set; }
 	}

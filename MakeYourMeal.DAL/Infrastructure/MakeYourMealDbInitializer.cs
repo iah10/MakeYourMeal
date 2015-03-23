@@ -17,12 +17,26 @@ namespace MakeYourMeal.DAL.Infrastructure
 			//create food categories
 			CreateCategories(context);
 
+			//create Order States
+			CreateOrderStates(context);
+
 			/*Create some food Items*/
 
 			//Create the BigDeluxe Burger
 			CreateBigDeluxe(context);
 
 			context.Commit();
+		}
+
+		private void CreateOrderStates(MakeYourMealEntities context)
+		{
+			new List<OrderState>
+			{
+				new OrderState{State = OrderState.NEW_ORDER},
+				new OrderState{State = OrderState.COMITED_STATE},
+				new OrderState{State = OrderState.READY_STATE},
+				new OrderState{State = OrderState.CLOSED_STATE}
+			}.ForEach(os => context.OrderStates.Add(os));
 		}
 
 		private void CreateCategories(MakeYourMealEntities context)
@@ -177,7 +191,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				new Ingredient()
 				{
 					Name = "Lettuce",
-					AdditionalCharge = new decimal(0),
+					AdditionalCharge = new decimal(1),
 					ImagePath = "Lettuce.png"
 				},
 				new Ingredient()

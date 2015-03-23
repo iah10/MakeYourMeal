@@ -22,6 +22,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 		public DbSet<Category> Categories { get; set; }
 		public DbSet<Ingredient> Ingredients { get; set; }
 		public DbSet<Order> Orders { get; set; }
+		public DbSet<OrderState> OrderStates { get; set; }
 		public DbSet<OrderItem> OrderItems { get; set; }
 		public DbSet<FoodItemHasIngredient> FoodItemHasIngredients { get; set; }
 
@@ -40,7 +41,6 @@ namespace MakeYourMeal.DAL.Infrastructure
 		protected override void OnModelCreating(DbModelBuilder modelBuilder)
 		{
 			base.OnModelCreating(modelBuilder);
-			modelBuilder.Conventions.Remove<IncludeMetadataConvention>();
 
 			modelBuilder.Entity<FoodItemHasIngredient>()
 				.Property(e => e.FoodItemName)
@@ -69,7 +69,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 			modelBuilder.Entity<FoodItem>()
 				.HasMany(e => e.FoodItemHasIngredients)
 				.WithRequired(e => e.FoodItem)
-				.HasForeignKey(f =>f.FoodItemName)
+				.HasForeignKey(f => f.FoodItemName)
 				.WillCascadeOnDelete(true);
 
 			modelBuilder.Entity<FoodItem>()
@@ -118,7 +118,12 @@ namespace MakeYourMeal.DAL.Infrastructure
 			modelBuilder.Entity<Order>()
 				.Property(e => e.TotalCost)
 				.HasPrecision(10, 4);
-
+		
+			modelBuilder.Entity<OrderState>()
+				.HasMany<Order>(o => o.Orders)
+				.WithRequired(order => order.OrderState)
+				.HasForeignKey(f => f.State)
+				.WillCascadeOnDelete(false);
 		}
 	}
 }

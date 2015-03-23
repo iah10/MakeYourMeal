@@ -112,11 +112,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\FoodItemConfiguration.cs" />
-    <Compile Include="Configuration\FoodItemHasIngredientsConfiguration.cs" />
-    <Compile Include="Configuration\IngredientConfiguration.cs" />
-    <Compile Include="Configuration\OrderConfigurations.cs" />
-    <Compile Include="Configuration\OrderItemConfiguration.cs" />
     <Compile Include="Infrastructure\BaseRepository.cs" />
     <Compile Include="Infrastructure\IRepository.cs" />
     <Compile Include="Infrastructure\MakeYourMealDbInitializer.cs" />
@@ -127,6 +122,7 @@
     <Compile Include="Repository\IngredientRepository.cs" />
     <Compile Include="Repository\OrderItemRepository.cs" />
     <Compile Include="Repository\OrderRepository.cs" />
+    <Compile Include="Repository\OrderStateRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MakeYourMeal.Data\MakeYourMeal.Data.csproj">
