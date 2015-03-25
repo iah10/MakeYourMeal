@@ -1,59 +1,75 @@
-﻿@model MakeYourMeal.ViewModels.OrderViewModel
+﻿@using MakeYourMeal.Data.Models
+@model IEnumerable<MakeYourMeal.Data.Models.Order>
 
 @{
-    ViewBag.Title = "My Order";
+	ViewBag.Title = "My Order";
+	int i = 1;
 }
 
-<h2>My Order</h2>
+<h1>My Orders</h1>
 
-<div>
-	<hr/>
-	<dl class="dl-horizontal">
-		<dt>
-			@Html.DisplayNameFor(model => model.TableNumber)
-		</dt>
+<h2>Orders In Progress</h2>
 
-		<dd>
-			@Html.DisplayFor(model => model.TableNumber)
-		</dd>
-
-		<dt>
-			@Html.DisplayNameFor(model => model.OrderTime)
-		</dt>
-
-		<dd>
-			@Html.DisplayFor(model => model.OrderTime)
-		</dd>
-
-		<dt>
-			@Html.DisplayNameFor(model => model.TotalCost)
-		</dt>
-
-		<dd>
-			@Html.DisplayFor(model => model.TotalCost)
-		</dd>
-
-		<dt>
-			@Html.DisplayNameFor(model => model.State)
-		</dt>
-
-		<dd>
-			@Html.DisplayFor(model => model.State)
-		</dd>
-
-	</dl>
-</div>
-<h3>Order Items</h3>
-<ul>
-	@foreach (var ing in Model.OrderItems)
+@{
+	foreach (var order in Model)
 	{
-		<li> @ing.FoodItemName</li>
-		<span>@Html.ActionLink("Delete Order Item", "DeleteOrderItem", new {id = ing.OrderItemId})</span>
-		<span>@Html.ActionLink("Add Lettuce", "AddExtraIngredient", new {orderItem = ing.OrderItemId, ingName = "Lettuce"})</span>
-		<span>@Html.ActionLink("Remove Pickles", "RemoveIngredient", new {orderItem = ing.OrderItemId, ingName = "Mayonnaise"})</span>
+		<h3> Order @i</h3>
+		<div>
+			<dl class="dl-horizontal">
+				<dt>
+					@Html.DisplayNameFor(o => o.TableNumber)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(o => order.TableNumber)
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(o => o.OrderedAt)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(o => order.OrderedAt)
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(o => o.TotalCost)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(o => order.TotalCost)
+				</dd>
+
+				<dt>
+					@Html.DisplayNameFor(o => o.State)
+				</dt>
+
+				<dd>
+					@Html.DisplayFor(o => order.State)
+				</dd>
+
+			</dl>
+		</div>
+		<h3>Order Items</h3>
+		<ul>
+			@foreach (var ing in order.OrderItems)
+			{
+				<li> @ing.FoodItemName</li>
+				if (order.OrderState.State.Equals(OrderState.NEW_ORDER))
+				{
+
+					<span>@Html.ActionLink("Delete Order Item", "DeleteOrderItem", new {id = ing.OrderItemId})</span>
+					<span>@Html.ActionLink("Add Lettuce", "AddExtraIngredient", new {orderItem = ing.OrderItemId, ingName = "Lettuce"})</span>
+					<span>@Html.ActionLink("Remove Pickles", "RemoveIngredient", new {orderItem = ing.OrderItemId, ingName = "Mayonnaise"})</span>
+				}
+			}
+		</ul>
+		if (order.OrderState.State.Equals(OrderState.NEW_ORDER))
+		{
+			@Html.ActionLink("Commit Order", "CommitCurrentOrder")
+		}
 	}
-</ul>
-@Html.ActionLink("Commit Order", "CommitOrder")
+}
 <p>
-    @Html.ActionLink("Back to List", "Index", "FoodItems")
+	@Html.ActionLink("Back to List", "Index", "FoodItems")
 </p>

@@ -46,19 +46,32 @@ namespace MakeYourMeal.Controllers
 		//Used by regular users
 		public ActionResult MyOrder()
 		{
-			int currentOrderId = _orderService.GetCurrentOrderId(this.HttpContext);
-			Order currentOrder = _orderService.GetOrderById(currentOrderId);
-			OrderViewModel viewModel = GetOrderViewModelForOrder(currentOrder);
-			return View(viewModel);
+			int currentTableNumber = OrderService.GetCurrentTableNumber(this.HttpContext);
+			var orders = _orderService.GetNewOrCommitedOrdersForTableNum(currentTableNumber);
+			return View(orders);
 		}
 
-		public ActionResult CommitOrder()
+		public ActionResult CommitCurrentOrder()
 		{
-			int currentOrderId = _orderService.GetCurrentOrderId(this.HttpContext);
-			Order currentOrder = _orderService.GetOrderById(currentOrderId);
-			_orderService.ChangeOrderState(currentOrder, OrderState.COMITED_STATE);
+			_orderService.CommitOrder(this.HttpContext);
 			AdminHub.Value.Clients.All.orderReceived();
 			return RedirectToAction("Index", "FoodItems");
+		}
+
+		public ActionResult OrderReady(int id)
+		{
+			Order currentOrder = _orderService.GetOrderById(id);
+			_orderService.ChangeOrderState(currentOrder, OrderState.READY_STATE);
+			//look up table connection Id
+			//
+			return RedirectToAction("Index");
+		}
+
+		public ActionResult OrderClosed(int id)
+		{
+			Order currentOrder = _orderService.GetOrderById(id);
+			_orderService.ChangeOrderState(currentOrder, OrderState.CLOSED_STATE);
+			return RedirectToAction("Index");
 		}
 
 		//used by cashier
@@ -66,7 +79,7 @@ namespace MakeYourMeal.Controllers
 		{
 			Order currentOrder = _orderService.GetOrderById(id);
 			OrderViewModel viewModel  = GetOrderViewModelForOrder(currentOrder);
-			return View("OrderDetails",viewModel);
+			return View(viewModel);
 		}
 
 		// GET: Order/Delete/5

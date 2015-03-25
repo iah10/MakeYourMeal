@@ -1,9 +1,8 @@
-﻿using MakeYourMeal.SignalR;
-using Microsoft.AspNet.SignalR;
+﻿using MakeYourMeal;
 using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(MakeYourMeal.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
 namespace MakeYourMeal
 {
     public partial class Startup
@@ -11,10 +10,6 @@ namespace MakeYourMeal
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-
-			//map SignalR
-			//var idProvider = new CustomUserIdProvider();
-			//GlobalHost.DependencyResolver.Register(typeof(IUserIdProvider), () => idProvider);
 	        app.MapSignalR();
         }
     }

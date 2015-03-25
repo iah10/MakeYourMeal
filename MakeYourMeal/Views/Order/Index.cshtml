@@ -4,11 +4,7 @@
 	ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
-
-<p>
-	@Html.ActionLink("Create New", "Create")
-</p>
+<h2>Orders</h2>
 <table class="table">
 	<tr>
 		<th>
@@ -37,7 +33,7 @@
 			</td>
 			<td>
 				@Html.ActionLink("Edit", "Edit", new { id = item.OrderId }) |
-				@Html.ActionLink("Details", "Details", new { id = item.OrderId }) |
+				@Html.ActionLink("Details", "OrderDetails", new { id = item.OrderId }) |
 				@Html.ActionLink("Delete", "Delete", new { id = item.OrderId })
 			</td>
 		</tr>
@@ -49,12 +45,13 @@
 {
 	<script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
 	<script type="text/javascript" src="~/signalr/hubs"></script>
+	<script src="~/Scripts/toastr.min.js"></script>
 	<script>
 		$(function () {
 
 			var hub = $.connection.adminHub;
 			hub.client.orderReceived = function () {
-				alert("It Worked on Admin");
+				toastr.info("New order received!");
 			}
 			$.connection.hub.start();
 		});

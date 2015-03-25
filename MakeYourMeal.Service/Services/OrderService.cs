@@ -13,10 +13,12 @@ namespace MakeYourMeal.Service.Services
 	{
 		IEnumerable<Order> GetAllOrders();
 		IEnumerable<Order> GetTodayCommitedOrders();
+		IEnumerable<Order> GetNewOrCommitedOrdersForTableNum(int tableNumber);
 		IEnumerable<Order> GetTodayOrders();
 		IEnumerable<OrderItem> GetOrderItemsForOrder(int orderId);
 		Order GetOrderById(int orderId);
 		int GetCurrentOrderId(HttpContextBase context);
+		void CommitOrder(HttpContextBase context);
 		void AddToTotalCost(Order order, decimal quantity);
 		void AddOrderItemToOrder(int orderId, OrderItem orderItem);
 		void RemoverOrderItemFromOrder(int orderId, int orderItemId);
@@ -35,12 +37,23 @@ namespace MakeYourMeal.Service.Services
 		private readonly IOrderItemService _orderItemService;
 		private readonly IOrderStateService _orderStateService;
 		public const string OrderSessionId = "OrderId";
+		public const string OrderSessionTableNumber = "TableNumber";
 
 		public OrderService(MakeYourMealEntities dbContext)
 		{
 			_orderStateService = new OrderStateService(dbContext);
 			_orderRepository = new OrderRepository(dbContext);
 			_orderItemService = new OrderItemService(dbContext);
+		}
+
+		public static int GetCurrentTableNumber(HttpContextBase context)
+		{
+			return 1; //Int32.Parse(context.Session[OrderSessionTableNumber].ToString());
+		}
+
+		public static void SetCurrentTableNumber(HttpContextBase context, int tableNumber)
+		{
+			context.Session[OrderSessionTableNumber] = tableNumber;
 		}
 
 		/// <summary>
@@ -53,12 +66,21 @@ namespace MakeYourMeal.Service.Services
 			{
 				var newOrder = new Order { 
 					State = OrderState.NEW_ORDER,
+					TableNumber = 1,
 					OrderState = _orderStateService.GetStateForId(OrderState.NEW_ORDER)
 				};
 				CreateNewOrder(newOrder);
 				context.Session[OrderSessionId] = newOrder.OrderId;
 			}
 			return Int32.Parse(context.Session[OrderSessionId].ToString());
+		}
+
+		public void CommitOrder(HttpContextBase context)
+		{
+			int currentOrderId = GetCurrentOrderId(context);
+			Order currentOrder = GetOrderById(currentOrderId);
+			ChangeOrderState(currentOrder, OrderState.COMITED_STATE);
+			context.Session[OrderSessionId] = null;
 		}
 
 		public void AddToTotalCost(Order order, decimal quantity)
@@ -96,6 +118,16 @@ namespace MakeYourMeal.Service.Services
 		{
 			return _orderRepository.GetMany(o => (!o.OrderState.State.Equals(OrderState.NEW_ORDER)
 				&& DbFunctions.TruncateTime(o.OrderedAt) == DateTime.Today));
+		}
+
+		public IEnumerable<Order> GetNewOrCommitedOrdersForTableNum(int tableNumber)
+		{
+			var order =
+				_orderRepository.GetMany(
+					o =>
+						((o.OrderState.State.Equals(OrderState.COMITED_STATE) || o.OrderState.State.Equals(OrderState.NEW_ORDER)) &&
+						o.TableNumber== tableNumber));
+			return order.OrderByDescending(o => o.OrderState.State);
 		}
 
 		public IEnumerable<Order> GetTodayOrders()
