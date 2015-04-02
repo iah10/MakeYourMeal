@@ -1,59 +1,46 @@
 ﻿@model IEnumerable<MakeYourMeal.Data.Models.Order>
 
 @{
-	ViewBag.Title = "Index";
+	ViewBag.Title = "Orders";
 }
 
 <h2>Orders</h2>
-<table class="table">
-	<tr>
-		<th>
-			@Html.DisplayNameFor(model => model.TableNumber)
-		</th>
-		<th>
-			@Html.DisplayNameFor(model => model.TotalCost)
-		</th>
-		<th>
-			@Html.DisplayNameFor(model => model.State)
-		</th>
-		<th></th>
-	</tr>
-
-	@foreach (var item in Model)
-	{
+<table class="table table-hover">
+	<thead>
 		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.TableNumber)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.OrderedAt)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.TotalCost)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.State)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody data-bind="foreach: Orders">
+		<tr>
+			<td data-bind="text: TableNumber"></td>
+			<td data-bind="text: OrderTime"></td>
+			<td data-bind="text: TotalCost"></td>
+			<td data-bind="text: State"></td>
 			<td>
-				@Html.DisplayFor(modelItem => item.TableNumber)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.TotalCost)
-			</td>
-			<td>
-				@Html.DisplayFor(modelItem => item.State)
-			</td>
-			<td>
-				@Html.ActionLink("Edit", "Edit", new { id = item.OrderId }) |
-				@Html.ActionLink("Details", "OrderDetails", new { id = item.OrderId }) |
-				@Html.ActionLink("Delete", "Delete", new { id = item.OrderId })
+				<a data-bind="attr: {'href':  '@Url.Action("OrderDetails", "Order")/' + OrderId}, text: 'Details'"></a>
 			</td>
 		</tr>
-	}
-
+	</tbody>
 </table>
 
 @section scripts
 {
 	<script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
 	<script type="text/javascript" src="~/signalr/hubs"></script>
+	<script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/knockout/knockout-2.2.0.js"></script>
 	<script src="~/Scripts/toastr.min.js"></script>
-	<script>
-		$(function () {
-
-			var hub = $.connection.adminHub;
-			hub.client.orderReceived = function () {
-				toastr.info("New order received!");
-			}
-			$.connection.hub.start();
-		});
-	</script>
+	<script src="~/Scripts/OrderAdmin.js"></script>
 }

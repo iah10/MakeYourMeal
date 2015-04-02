@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+using System.Linq;
 using System.Web.Mvc;
 using MakeYourMeal.Data.Models;
 using MakeYourMeal.DAL.Infrastructure;
@@ -25,8 +27,22 @@ namespace MakeYourMeal.Controllers
 		// GET: Order
 		public ActionResult Index()
 		{
+			return View();
+		}
+
+		public ActionResult GetTodayCommitedOrders()
+		{
 			var orders = _orderService.GetTodayCommitedOrders();
-			return View(orders);
+			return Json(
+				from o in orders
+				select new
+				{
+					OrderId = o.OrderId,
+					TableNumber = o.TableNumber,
+					OrderTime = o.OrderedAt.ToString("HH:mm tt"),
+					TotalCost = o.TotalCost,
+					State = o.OrderState.State
+				}, JsonRequestBehavior.AllowGet);
 		}
 
 		public ActionResult AddOrderItem(string id)
@@ -78,7 +94,7 @@ namespace MakeYourMeal.Controllers
 		public ActionResult OrderDetails(int id)
 		{
 			Order currentOrder = _orderService.GetOrderById(id);
-			OrderViewModel viewModel  = GetOrderViewModelForOrder(currentOrder);
+			OrderViewModel viewModel = GetOrderViewModelForOrder(currentOrder);
 			return View(viewModel);
 		}
 
