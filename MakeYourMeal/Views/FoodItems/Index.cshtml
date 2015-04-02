@@ -33,7 +33,7 @@
 	<!-- /#sidebar-wrapper -->
 	<!-- Page Content -->
 	<div id="page-content-wrapper" class="panel-body">
-		<button type="button" class="hamburger is-closed" data-toggle="offcanvas">
+		<button type="button" class="hamburger is-open" data-toggle="offcanvas">
 			<span class="hamb-top"></span>
 			<span class="hamb-middle"></span>
 			<span class="hamb-bottom"></span>
@@ -51,18 +51,17 @@
 	<script type="text/javascript">
 		$(document).ready(function () {
 			var trigger = $('.hamburger'),
-				overlay = $('.overlay'),
-				isClosed = false;
+				isClosed = true;
+
+			$('#wrapper').toggleClass('toggled');
 
 			function hamburgerCross() {
 
 				if (isClosed) {
-					overlay.hide();
 					trigger.removeClass('is-open');
 					trigger.addClass('is-closed');
 					isClosed = false;
 				} else {
-					overlay.show();
 					trigger.removeClass('is-closed');
 					trigger.addClass('is-open');
 					isClosed = true;
@@ -80,14 +79,14 @@
 	</script>
 
 	<script type="text/javascript">
-		$(function() {
-			$(".updatePage").click(function() {
+		$(function () {
+			$(".updatePage").click(function () {
 				//get the category id
 				var id = $(this).attr("id");
 				var url = "/FoodItems/Details/" + id;
 				// Perform the ajax call
 				$.post(url,
-					function(data) {
+					function (data) {
 						//Fill div with results
 						$("#plate").html(data);
 					});
