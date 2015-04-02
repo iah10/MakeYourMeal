@@ -204,7 +204,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				{
 					Name = "Onion",
 					AdditionalCharge = new decimal(0),
-					ImagePath = "Onion.jpg"
+					ImagePath = "Onion.png"
 				},
 				new Ingredient()
 				{

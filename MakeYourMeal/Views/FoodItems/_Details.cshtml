@@ -12,9 +12,10 @@
 	<span class="floatL">Details</span>
 
 	@{
-		var imagePath = path + Model.ImagePath;
-		<div class="floatL"><img src="@imagePath" alt="@Model.Name"/>
-		</div>
+	var imagePath = path + Model.ImagePath;
+	<div class="floatL">
+		<img src="@imagePath" alt="@Model.Name" />
+	</div>
 	}
 </h2>
 
@@ -50,16 +51,19 @@
 </div>
 
 
-<hr class="clearB"/>
+<hr class="clearB" />
 
 <h2 class="clearB text-center">Ingredients</h2>
+<div id="droppable-6" class="ui-widget-header">
+	<p>Drop here</p>
+</div>
 <ul class="media-list media-middle text-center">
 	@foreach (var ing in Model.Ingredients)
 	{
-		var ingImgPath = path + ing.ImagePath;
-		<li class="media-object">
-			<img src="@ingImgPath" alt="@ing.Name" />
-		</li>
+	var ingImgPath = path + ing.ImagePath;
+	<li class="media-object text-center">
+		<img src="@ingImgPath" class="img-responsive draggable center-block" alt="@ing.Name" />
+	</li>
 
 	}
 </ul>
@@ -67,7 +71,7 @@
 	@Html.ActionLink("Edit", "Edit", new {id = Model.Name}) |
 	@Html.ActionLink("Back to List", "Index")
 </p>
-
+<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
 <script>
 	$(function () {
 		$('.addToOrder').click(function () {
@@ -80,5 +84,29 @@
 				console.log("2akal");
 			});
 		});
+
+		$('.draggable').draggable({
+			revert: function (event, ui) {
+				$(this).data("uiDraggable").originalPosition = {
+					top: 0,
+					left: 0
+				};
+
+				//$(this).width = {$:("#page-content-wrapper").width()/11.3};
+
+				return !event;
+			}
+		});
+	});
+
+	$("#droppable-6").droppable({
+		activeClass: "active",
+		hoverClass: "hover",
+		drop: function (event, ui) {
+			$(this)
+			.addClass("ui-state-highlight")
+			.find("p")
+			.html("Dropped!");
+		}
 	});
 </script>
