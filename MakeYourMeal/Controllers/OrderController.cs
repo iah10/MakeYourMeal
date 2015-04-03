@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using MakeYourMeal.Data.Models;
@@ -69,8 +68,17 @@ namespace MakeYourMeal.Controllers
 
 		public ActionResult CommitCurrentOrder()
 		{
+			var orderId = _orderService.GetCurrentOrderId(this.HttpContext);
+			var order = _orderService.GetOrderById(orderId);
 			_orderService.CommitOrder(this.HttpContext);
-			AdminHub.Value.Clients.All.orderReceived();
+			AdminHub.Value.Clients.All.orderReceived(new
+			{
+				OrderId = order.OrderId,
+				TableNumber = order.TableNumber,
+				OrderTime = order.OrderedAt.ToString("HH:mm tt"),
+				TotalCost = order.TotalCost,
+				State = order.OrderState.State
+			});
 			return RedirectToAction("Index", "FoodItems");
 		}
 
@@ -79,7 +87,6 @@ namespace MakeYourMeal.Controllers
 			Order currentOrder = _orderService.GetOrderById(id);
 			_orderService.ChangeOrderState(currentOrder, OrderState.READY_STATE);
 			//look up table connection Id
-			//
 			return RedirectToAction("Index");
 		}
 

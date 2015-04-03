@@ -26,8 +26,9 @@ $(function () {
 	ko.applyBindings(viewModel);
 
 	//order receivied 
-	hub.client.orderReceived = function () {
+	hub.client.orderReceived = function (order) {
 		toastr.info("New order received!");
+		viewModel.Orders.unshift(new CartApp.Order(order));
 	}
 
 	//start real time connection
@@ -36,9 +37,7 @@ $(function () {
 	//fill the table
 	$.get("/Order/GetTodayCommitedOrders", function (items) {
 		$.each(items, function (idx, item) {
-			console.log(item);
-			viewModel.Orders.push(new CartApp.Order(item));
+			viewModel.Orders.unshift(new CartApp.Order(item));
 		});
 	}, "json");
-
 });

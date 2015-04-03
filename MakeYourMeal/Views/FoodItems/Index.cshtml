@@ -48,49 +48,5 @@
 <!-- /#wrapper -->
 @section scripts
 {
-	<script type="text/javascript">
-		$(document).ready(function () {
-			var trigger = $('.hamburger'),
-				isClosed = true;
-
-			$('#wrapper').toggleClass('toggled');
-
-			function hamburgerCross() {
-
-				if (isClosed) {
-					trigger.removeClass('is-open');
-					trigger.addClass('is-closed');
-					isClosed = false;
-				} else {
-					trigger.removeClass('is-closed');
-					trigger.addClass('is-open');
-					isClosed = true;
-				}
-			}
-
-			trigger.click(function () {
-				hamburgerCross();
-			});
-
-			$('[data-toggle="offcanvas"]').click(function () {
-				$('#wrapper').toggleClass('toggled');
-			});
-		});
-	</script>
-
-	<script type="text/javascript">
-		$(function () {
-			$(".updatePage").click(function () {
-				//get the category id
-				var id = $(this).attr("id");
-				var url = "/FoodItems/Details/" + id;
-				// Perform the ajax call
-				$.post(url,
-					function (data) {
-						//Fill div with results
-						$("#plate").html(data);
-					});
-			});
-		});
-	</script>
+	<script src="~/Scripts/FoodItems.js"></script>
 }

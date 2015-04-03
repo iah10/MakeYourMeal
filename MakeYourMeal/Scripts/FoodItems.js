@@ -1,0 +1,55 @@
+﻿$(function () {
+
+	//load menu
+	var trigger = $('.hamburger'),
+			isClosed = true;
+
+	$('#wrapper').toggleClass('toggled');
+
+	function hamburgerCross() {
+
+		if (isClosed) {
+			trigger.removeClass('is-open');
+			trigger.addClass('is-closed');
+			isClosed = false;
+		} else {
+			trigger.removeClass('is-closed');
+			trigger.addClass('is-open');
+			isClosed = true;
+		}
+	}
+
+	trigger.click(function () {
+		hamburgerCross();
+	});
+
+	$('[data-toggle="offcanvas"]').click(function () {
+		$('#wrapper').toggleClass('toggled');
+	});
+
+	//start hub
+	var hub = $.connection.adminHub;
+
+	//order receivied 
+	hub.client.orderReceived = function (order) {
+		toastr.info("New order received!");
+		viewModel.Orders.unshift(new CartApp.Order(order));
+	}
+
+	//start real time connection
+	$.connection.hub.start();
+
+
+	//some events
+	$(".updatePage").click(function () {
+		//get the category id
+		var id = $(this).attr("id");
+		var url = "/FoodItems/Details/" + id;
+		// Perform the ajax call
+		$.post(url,
+			function (data) {
+				//Fill div with results
+				$("#plate").html(data);
+			});
+	});
+});
