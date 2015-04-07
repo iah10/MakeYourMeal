@@ -18,7 +18,7 @@
 			isClosed = true;
 		}
 	}
-
+	id = "drag-container"
 	trigger.click(function () {
 		hamburgerCross();
 	});
