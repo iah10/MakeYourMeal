@@ -59,13 +59,11 @@
 		{
 			var ingImgPath = path + ing.ImagePath;
 			<li class="media-object text-center">
-				<img src="@ingImgPath" class="img-responsive draggable center-block" alt="@ing.Name"/>
+				<img src="@ingImgPath" class="img-responsive draggable center-block" alt="@ing.Name" />
 			</li>
 		}
 	</ul>
 </div>
-<script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
-<script src="~/Scripts/jquery-ui-touch-punch.js"></script>
 <script>
 	$(function () {
 		$('.addToOrder').click(function () {

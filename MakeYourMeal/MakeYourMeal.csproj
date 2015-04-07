@@ -249,17 +249,15 @@
     <Content Include="Images\BigDeluxe.jpg" />
     <Content Include="Images\Cheese.png" />
     <Content Include="Images\ChickenFillet.jpg" />
+    <Content Include="Images\ChickenFillet.png" />
     <Content Include="Images\CrownBun.png" />
-    <Content Include="Images\GrilledChicken.jpg" />
     <Content Include="Images\HeelBun.png" />
-    <Content Include="Images\GrilledChicken.jpg" />
     <Content Include="Images\Lettuce.png" />
     <Content Include="Images\Mayonnaise.png" />
-    <Content Include="Images\Mustard.jpg" />
     <Content Include="Images\Onion.png" />
     <Content Include="Images\Pickels.png" />
     <Content Include="Images\Tomato.png" />
-    <Content Include="Images\Turkey.jpg" />
+    <Content Include="Images\Trash.png" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -269,8 +267,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\toastr.scss" />
     <Content Include="Content\toastr.less" />
-    <None Include="Properties\PublishProfiles\makeyourmaeal.pubxml" />
-    <None Include="Properties\PublishProfiles\makeyourmeal %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\makeyourmeal.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -345,6 +341,7 @@
     <Content Include="Views\FoodItems\_FoodItems.cshtml" />
     <Content Include="Views\Order\MyOrder.cshtml" />
     <Content Include="Scripts\toastr.js.map" />
+    <Content Include="Views\FoodItems\_Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
