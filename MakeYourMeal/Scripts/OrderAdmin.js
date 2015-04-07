@@ -13,7 +13,7 @@ CartApp.Order = function (item)
 
 CartApp.Page = function () {
     var self = this;
-    self.pageSize = 5
+	self.pageSize = 5;
     self.currentPage = ko.observable(1);
     self.Orders = ko.observableArray([]);
     self.lastorder = 0 ; 
