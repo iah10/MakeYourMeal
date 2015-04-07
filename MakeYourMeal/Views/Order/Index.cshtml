@@ -4,8 +4,8 @@
 	ViewBag.Title = "Orders";
 }
 
-<h2>Orders</h2>
-<table class="table table-hover">
+<h2> Orders</h2>
+<table class="table table-striped" style="width: 75% ; margin-left: auto ; margin-right: auto ;">
 	<thead>
 		<tr>
 			<th>
@@ -23,18 +23,27 @@
 			<th></th>
 		</tr>
 	</thead>
-	<tbody data-bind="foreach: Orders">
-		<tr>
-			<td data-bind="text: TableNumber"></td>
-			<td data-bind="text: OrderTime"></td>
-			<td data-bind="text: TotalCost"></td>
-			<td data-bind="text: State"></td>
-			<td>
-				<a data-bind="attr: {'href':  '@Url.Action("OrderDetails", "Order")/' + OrderId}, text: 'Details'"></a>|
-				<a data-bind="attr: {'href':  '@Url.Action("OrderReady", "Order")/' + OrderId}, text: 'Ready'"></a>
-			</td>
-		</tr>
-	</tbody>
+    <tbody data-bind="foreach: currentTransactions">
+        <tr data-bind="click: $root.details">
+            <td data-bind="text: TableNumber"></td>
+            <td data-bind="text: OrderTime"></td>
+            <td data-bind="text: TotalCost"></td>
+            <td data-bind="text: State"></td>
+            <td>
+                <a data-bind="attr: {'href':  '@Url.Action("OrderDetails", "Order")/' + OrderId}, text: 'Details'"></a>
+                <a data-bind="attr: {'href':  '@Url.Action("OrderReady", "Order")/' + OrderId}, text: 'Ready'"></a>
+            </td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="5">
+                <span data-bind="click:previousPage, visible:currentPage() > 1" class="glyphicon glyphicon-circle-arrow-left" style="cursor:pointer;"></span>
+                <span>Page:</span><span data-bind="text:currentPage"></span>
+                <span data-bind="click:nextPage ,visible: currentPage() < Math.ceil (Orders().length / pageSize )" class="glyphicon glyphicon-circle-arrow-right" style="cursor:pointer;"></span>
+            </td>
+        </tr>
+    </tfoot>
 </table>
 
 @section scripts
