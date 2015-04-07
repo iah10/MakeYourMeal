@@ -29,6 +29,7 @@ textarea {
 
 #droppable-6 {
 	float: left;
+    width : 25% ;
 }
 
 .droppable-active {
@@ -46,7 +47,8 @@ textarea {
 }
 
 #drag-container {
-	clear: left;
+	float: left;
+    padding-left:20% ;
 }
 /*********************************/
 
