@@ -30,7 +30,8 @@
 			<td data-bind="text: TotalCost"></td>
 			<td data-bind="text: State"></td>
 			<td>
-				<a data-bind="attr: {'href':  '@Url.Action("OrderDetails", "Order")/' + OrderId}, text: 'Details'"></a>
+				<a data-bind="attr: {'href':  '@Url.Action("OrderDetails", "Order")/' + OrderId}, text: 'Details'"></a>|
+				<a data-bind="attr: {'href':  '@Url.Action("OrderReady", "Order")/' + OrderId}, text: 'Ready'"></a>
 			</td>
 		</tr>
 	</tbody>

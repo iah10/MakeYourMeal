@@ -48,7 +48,8 @@ namespace MakeYourMeal.Service.Services
 
 		public static int GetCurrentTableNumber(HttpContextBase context)
 		{
-			return 1; //Int32.Parse(context.Session[OrderSessionTableNumber].ToString());
+			SetCurrentTableNumber(context, 1);
+			return Int32.Parse(context.Session[OrderSessionTableNumber].ToString());
 		}
 
 		public static void SetCurrentTableNumber(HttpContextBase context, int tableNumber)
@@ -66,7 +67,7 @@ namespace MakeYourMeal.Service.Services
 			{
 				var newOrder = new Order { 
 					State = OrderState.NEW_ORDER,
-					TableNumber = 1,
+					TableNumber = GetCurrentTableNumber(context),
 					OrderState = _orderStateService.GetStateForId(OrderState.NEW_ORDER)
 				};
 				CreateNewOrder(newOrder);

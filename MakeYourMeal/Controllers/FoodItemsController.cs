@@ -22,6 +22,7 @@ namespace MakeYourMeal.Controllers
 		// GET: FoodItems
 		public ActionResult Index()
 		{
+			ViewBag.TableNumber = OrderService.GetCurrentTableNumber(this.HttpContext);
 			var categories = _categoryService.GetAllCategories();
 			return View(categories);
 		}

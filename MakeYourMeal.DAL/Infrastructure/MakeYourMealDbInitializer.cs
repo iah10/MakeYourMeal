@@ -22,8 +22,9 @@ namespace MakeYourMeal.DAL.Infrastructure
 
 			/*Create some food Items*/
 
-			//Create the BigDeluxe Burger
 			CreateBigDeluxe(context);
+
+			CreateChickenFillet(context);
 
 			context.Commit();
 		}
@@ -52,17 +53,86 @@ namespace MakeYourMeal.DAL.Infrastructure
             }.ForEach(m => context.Categories.Add(m));
 		}
 
+		private void CreateChickenFillet(MakeYourMealEntities context)
+		{
+			FoodItem cf = new FoodItem()
+			{
+				Name = "Chicken Fillet",
+				CategoryName = Category.CHICKEN,
+				ImagePath = "ChickenFillet.jpg",
+				Price = new decimal(11.5)
+			};
+
+			context.FoodItems.Add(cf);
+
+			//add items ingredients
+			FoodItemHasIngredient chickenFilletAndCrownBun = new FoodItemHasIngredient()
+			{
+				FoodItemName = "Chicken Fillet",
+				IngredientName = "Crown Bun",
+				Quantity = 1,
+				Position = 1
+			};
+			context.FoodItemHasIngredients.Add(chickenFilletAndCrownBun);
+
+			FoodItemHasIngredient chickenFilletAndMayoUpper = new FoodItemHasIngredient()
+			{
+				FoodItemName = "Chicken Fillet",
+				IngredientName = "Mayonnaise",
+				Quantity = 1,
+				Position = 2
+			};
+			context.FoodItemHasIngredients.Add(chickenFilletAndMayoUpper);
+
+			FoodItemHasIngredient chickenFilletAndChickenFillet = new FoodItemHasIngredient()
+			{
+				FoodItemName = "Chicken Fillet",
+				IngredientName = "Chicken Fillet",
+				Quantity = 1,
+				Position = 3
+			};
+			context.FoodItemHasIngredients.Add(chickenFilletAndChickenFillet);
+
+			FoodItemHasIngredient chickenFilletAndLettuce = new FoodItemHasIngredient()
+			{
+				FoodItemName = "Chicken Fillet",
+				IngredientName = "Lettuce",
+				Quantity = 1,
+				Position = 4
+			};
+			context.FoodItemHasIngredients.Add(chickenFilletAndLettuce);
+
+			FoodItemHasIngredient chickenFilletAndLowerMayo = new FoodItemHasIngredient()
+			{
+				FoodItemName = "Chicken Fillet",
+				IngredientName = "Mayonnaise",
+				Quantity = 1,
+				Position = 5
+			};
+			context.FoodItemHasIngredients.Add(chickenFilletAndLowerMayo);
+
+			FoodItemHasIngredient chickenFilletAndHeelBun = new FoodItemHasIngredient()
+			{
+				FoodItemName = "Chicken Fillet",
+				IngredientName = "Heel Bun",
+				Quantity = 1,
+				Position = 6
+			};
+			context.FoodItemHasIngredients.Add(chickenFilletAndHeelBun);
+
+		}
+
 		private void CreateBigDeluxe(MakeYourMealEntities context)
 		{
-			FoodItem burger = new FoodItem()
+			FoodItem bk = new FoodItem()
 			{
 				Name = "Big Deluxe",
 				CategoryName = Category.CHARBROILED_BURGERS,
-				ImagePath = "BigDeluxe_small.jpg",
+				ImagePath = "BigDeluxe.jpg",
 				Price = new decimal(12.5)
 			};
 
-			context.FoodItems.Add(burger);
+			context.FoodItems.Add(bk);
 
 			//add items ingredients
 			FoodItemHasIngredient bigDeluxeAndCrownBun = new FoodItemHasIngredient()
@@ -83,21 +153,12 @@ namespace MakeYourMeal.DAL.Infrastructure
 			};
 			context.FoodItemHasIngredients.Add(bigDeluxeAndMayoUpper);
 
-			FoodItemHasIngredient bigDeluxeAndKetchup = new FoodItemHasIngredient()
-			{
-				FoodItemName = "Big Deluxe",
-				IngredientName = "Ketchup",
-				Quantity = 1,
-				Position = 3
-			};
-			context.FoodItemHasIngredients.Add(bigDeluxeAndKetchup);
-
 			FoodItemHasIngredient bigDeluxeAndCheese = new FoodItemHasIngredient()
 			{
 				FoodItemName = "Big Deluxe",
 				IngredientName = "Cheese",
 				Quantity = 1,
-				Position = 4
+				Position = 3
 			};
 			context.FoodItemHasIngredients.Add(bigDeluxeAndCheese);
 
@@ -106,7 +167,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				FoodItemName = "Big Deluxe",
 				IngredientName = "Beef",
 				Quantity = 1,
-				Position = 5
+				Position = 4
 			};
 			context.FoodItemHasIngredients.Add(bigDeluxeAndBeef);
 
@@ -115,7 +176,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				FoodItemName = "Big Deluxe",
 				IngredientName = "Onion",
 				Quantity = 1,
-				Position = 6
+				Position = 5
 			};
 			context.FoodItemHasIngredients.Add(bigDeluxeAndOnion);
 
@@ -124,7 +185,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				FoodItemName = "Big Deluxe",
 				IngredientName = "Tomato",
 				Quantity = 1,
-				Position = 7
+				Position = 6
 			};
 			context.FoodItemHasIngredients.Add(bigDeluxeAndTomato);
 
@@ -133,7 +194,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				FoodItemName = "Big Deluxe",
 				IngredientName = "Lettuce",
 				Quantity = 1,
-				Position = 8
+				Position = 7
 			};
 			context.FoodItemHasIngredients.Add(bigDeluxeAndLettuce);
 
@@ -142,7 +203,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				FoodItemName = "Big Deluxe",
 				IngredientName = "Pickles",
 				Quantity = 1,
-				Position = 9
+				Position = 8
 			};
 			context.FoodItemHasIngredients.Add(bigDeluxeAndPickles);
 
@@ -151,7 +212,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				FoodItemName = "Big Deluxe",
 				IngredientName = "Mayonnaise",
 				Quantity = 1,
-				Position = 10
+				Position = 9
 			};
 			context.FoodItemHasIngredients.Add(bigDeluxeAndMayoLower);
 
@@ -160,7 +221,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				FoodItemName = "Big Deluxe",
 				IngredientName = "Heel Bun",
 				Quantity = 1,
-				Position = 11
+				Position = 10
 			};
 			context.FoodItemHasIngredients.Add(bigDeluxeAndHeelBun);
 
@@ -222,7 +283,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				{
 					Name = "Ketchup",
 					AdditionalCharge = new decimal(0),
-					ImagePath = "Ketchup.jpg"
+					ImagePath = "Ketchup.png"
 				},
 				new Ingredient()
 				{
@@ -240,13 +301,13 @@ namespace MakeYourMeal.DAL.Infrastructure
 				{
 					Name = "Chicken Fillet",
 					AdditionalCharge = new decimal(1),
-					ImagePath = "ChickenFillet.jpg"
+					ImagePath = "ChickenFillet.png"
 				},
 				new Ingredient()
 				{
 					Name = "Grilled Chicken",
 					AdditionalCharge = new decimal(1),
-					ImagePath = "GrilledChicken.jpg"
+					ImagePath = "GrilledChicken.png"
 				},
 				new Ingredient()
 				{

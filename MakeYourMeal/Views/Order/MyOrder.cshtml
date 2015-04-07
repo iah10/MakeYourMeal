@@ -58,9 +58,9 @@
 				if (order.OrderState.State.Equals(OrderState.NEW_ORDER))
 				{
 
-					<span>@Html.ActionLink("Delete Order Item", "DeleteOrderItem", new {id = ing.OrderItemId})</span>
-					<span>@Html.ActionLink("Add Lettuce", "AddExtraIngredient", new {orderItem = ing.OrderItemId, ingName = "Lettuce"})</span>
-					<span>@Html.ActionLink("Remove Pickles", "RemoveIngredient", new {orderItem = ing.OrderItemId, ingName = "Mayonnaise"})</span>
+					<span>@Html.ActionLink("Delete Order Item", "DeleteOrderItem", new { id = ing.OrderItemId })</span>
+					<span>@Html.ActionLink("Add Lettuce", "AddExtraIngredient", new { orderItem = ing.OrderItemId, ingName = "Lettuce" })</span>
+					<span>@Html.ActionLink("Remove Pickles", "RemoveIngredient", new { orderItem = ing.OrderItemId, ingName = "Mayonnaise" })</span>
 				}
 			}
 		</ul>
@@ -73,3 +73,28 @@
 <p>
 	@Html.ActionLink("Back to List", "Index", "FoodItems")
 </p>
+@section scripts
+{
+
+	<script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+	<script type="text/javascript" src="~/signalr/hubs"></script>
+	<script src="~/Scripts/knockout-3.3.0.js"></script>
+	<script src="~/Scripts/toastr.min.js"></script>
+	<script>
+		$(function () {
+
+			//start hub
+			var hub = $.connection.customersHub;
+
+			//order receivied
+			hub.client.orderStateChanged = function (state) {
+				toastr.info("Your Order Is Now " + state);
+			}
+
+			//start real time connection
+			$.connection.hub.start().done(function () {
+				hub.server.registerConId(@ViewBag.TableNumber);
+			});
+		});
+</script>
+}

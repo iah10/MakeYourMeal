@@ -48,5 +48,11 @@
 <!-- /#wrapper -->
 @section scripts
 {
+	<script>
+		var tableNumber = @ViewBag.TableNumber;
+	</script>
+	<script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+	<script type="text/javascript" src="~/signalr/hubs"></script>
+	<script src="~/Scripts/toastr.js"></script>
 	<script src="~/Scripts/FoodItems.js"></script>
 }

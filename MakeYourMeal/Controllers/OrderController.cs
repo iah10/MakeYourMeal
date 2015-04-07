@@ -20,6 +20,7 @@ namespace MakeYourMeal.Controllers
 		private readonly IOrderItemService _orderItemService = new OrderItemService(_context);
 		private readonly IFoodItemService _foodItemService = new FoodItemService(_context);
 		protected readonly Lazy<IHubContext> AdminHub = new Lazy<IHubContext>(() => GlobalHost.ConnectionManager.GetHubContext<AdminHub>());
+		protected readonly Lazy<IHubContext> CustomersHubb = new Lazy<IHubContext>(() => GlobalHost.ConnectionManager.GetHubContext<CustomersHub>());
 
 		/*--------------------------*/
 
@@ -63,6 +64,7 @@ namespace MakeYourMeal.Controllers
 		{
 			int currentTableNumber = OrderService.GetCurrentTableNumber(this.HttpContext);
 			var orders = _orderService.GetNewOrCommitedOrdersForTableNum(currentTableNumber);
+			ViewBag.TableNumber = OrderService.GetCurrentTableNumber(this.HttpContext);
 			return View(orders);
 		}
 
@@ -87,6 +89,8 @@ namespace MakeYourMeal.Controllers
 			Order currentOrder = _orderService.GetOrderById(id);
 			_orderService.ChangeOrderState(currentOrder, OrderState.READY_STATE);
 			//look up table connection Id
+			string connectionId = CustomersHub.GetConnectionId(currentOrder.TableNumber+"");
+			CustomersHubb.Value.Clients.Client(connectionId).orderStateChanged(OrderState.READY_STATE);
 			return RedirectToAction("Index");
 		}
 

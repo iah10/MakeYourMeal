@@ -28,17 +28,17 @@
 	});
 
 	//start hub
-	var hub = $.connection.adminHub;
+	var hub = $.connection.customersHub;
 
 	//order receivied 
-	hub.client.orderReceived = function (order) {
-		toastr.info("New order received!");
-		viewModel.Orders.unshift(new CartApp.Order(order));
+	hub.client.orderStateChanged = function (state) {
+		toastr.info("Your Order Is Now " + state);
 	}
 
 	//start real time connection
-	$.connection.hub.start();
-
+	$.connection.hub.start().done(function () {
+		hub.server.registerConId(window.tableNumber);
+	});
 
 	//some events
 	$(".updatePage").click(function () {

@@ -26,11 +26,34 @@ textarea {
 .clearB {
 	clear: both;
 }
+
+#droppable-6 {
+	float: left;
+}
+
+.droppable-active {
+	-webkit-transition:all 0.25s linear;
+	-moz-transition:all 0.25s linear;
+	-ms-transition:all 0.25s linear;
+	-o-transition:all 0.25s linear;
+	transition:all 0.25s linear;
+
+	-webkit-transform:scale(1.2);
+	-moz-transform:scale(1.2);
+	-ms-transform:scale(1.2);
+	-o-transform:scale(1.2);
+	transform:scale(1.2);
+}
+
+#drag-container {
+	clear: left;
+}
 /*********************************/
 
 body {
     position: relative;
     overflow-x: hidden;
+	overflow-y: hidden;
 	padding-top: 50px;
 	padding-bottom: 20px;
 }
