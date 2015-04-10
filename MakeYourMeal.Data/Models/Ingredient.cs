@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,7 +20,7 @@ namespace MakeYourMeal.Data.Models
 		public string ImagePath { get; set; }
 
 		public decimal AdditionalCharge { get; set; }
-
+		public bool IsRemovable { get; set; }
 		public virtual ICollection<FoodItemHasIngredient> FoodItemHasIngredients { get; set; }
 
 		public virtual ICollection<OrderItem> ExtraOrderItems { get; set; }

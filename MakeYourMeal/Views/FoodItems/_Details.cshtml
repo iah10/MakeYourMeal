@@ -51,15 +51,38 @@
 <hr class="clearB" />
 
 <div id="droppable-6" class="ui-widget-header">
-	<img src="~/Images/Trash.png" class="img-responsive" />
+	<img src="~/Images/Trash.png" class="img-responsive"/>
+</div>
+<div id ="extra">
+	<ul id="extraIngredients" class="media-list media-middle text-center">
+		<li class="media-object text-center draggable">
+			<img src="/Images/Mayonnaise.png" class="img-responsive center-block" alt="Mayonnaise">
+		</li>
+		<li class="media-object text-center draggable">
+			<img src="/Images/Cheese.png" class="img-responsive center-block" alt="Cheese">
+		</li>
+		<li class="media-object text-center draggable">
+			<img src="/Images/Onion.png" class="img-responsive center-block" alt="Onion">
+		</li>
+		<li class="media-object text-center draggable">
+			<img src="/Images/Tomato.png" class="img-responsive center-block" alt="Tomato">
+		</li>
+		<li class="media-object text-center draggable">
+			<img src="/Images/Lettuce.png" class="img-responsive center-block" alt="Lettuce">
+		</li>
+		<li class="media-object text-center draggable">
+			<img src="/Images/Pickels.png" class="img-responsive center-block" alt="Pickles">
+		</li>
+	</ul>
 </div>
 <div id="drag-container">
-	<ul class="media-list media-middle text-center">
+	<ul id="ingredients"  class="media-list media-middle text-center">
 		@foreach (var ing in Model.Ingredients)
 		{
 			var ingImgPath = path + ing.ImagePath;
-			<li class="media-object text-center">
-				<img src="@ingImgPath" class="img-responsive draggable center-block" alt="@ing.Name" />
+			var nDrag = !ing.IsRemovable ? "static" : "";
+			<li class="media-object text-center @nDrag">
+				<img src="@ingImgPath" class="img-responsive center-block" alt="@ing.Name" />
 			</li>
 		}
 	</ul>
@@ -73,27 +96,73 @@
 			});
 		});
 
+		//get config data
+		function config(fixed, items) {
+			return {
+				cancel: fixed,
+				items: items,
+				revert: true,
+				scroll: false,
+				containment: "document",
+				opacity: 0.75,
+				tolerance: "pointer",
+				forcePlaceholderSize: true,
+				start: function () {
+					$(fixed, this).each(function () {
+						var $this = $(this);
+						$this.data('pos', $this.index());
+					});
+				},
+				change: function () {
+					var $sortable = $(this);
+					var $statics = $(fixed, this).detach();
+					var tagName = $statics.prop('tagName');
+					var $helper = $('<' + tagName + '/>').prependTo(this);
+					$statics.each(function () {
+						var $this = $(this);
+						var target = $this.data('pos');
+						$this.insertAfter($(items, $sortable).eq(target));
+					});
+					$helper.remove();
+				},
+				update: function (e, ui) {
+					var $sortable = $(this);
+				},
+				stop: function (event, ui) {
+					$(this).find('.static:last').appendTo(this);
+				},
+				over : function(){
+					$(this).find('.static:last').appendTo(this);
+				},
+				out: function () {
+					$(this).find('.static:last').appendTo(this);
+				},
+				moved: function () {
+					$(this).find('.static:last').appendTo(this);
+				}
+			};
+		}
+
+		$('#ingredients').sortable(config('.static', 'li')).disableSelection();
+
 		$('.draggable').draggable({
-			revert: function (event, ui) {
-				$(this).data("uiDraggable").originalPosition = {
-					top: 0,
-					left: 0
-				};
-				return !event;
-			},
-			scroll: false
-			//containment: "document"
+			connectToSortable: '#ingredients',
+			revert: 'invalid',
+			helper: 'clone',
+			opacity: 0.75,
+			containment: "document"
 		});
 	});
 
 	$("#droppable-6").droppable({
+		accept: "#ingredients li",
 		activeClass: "droppable-active",
-		hoverClass: "hover",
 		drop: function (event, ui) {
-			$(this)
-			.addClass("ui-state-highlight")
-			.find("p")
-			.html("Dropped!");
+			$(ui.draggable).remove();
+			var src = "img[src$='" + ui.draggable.find('img').attr('src') + "']";
+			//console.log(src);
+			$('#ingredients').find(src).parent().remove();
 		}
 	});
+
 </script>

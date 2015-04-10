@@ -29,9 +29,13 @@ textarea {
 
 #droppable-6 {
 	float: left;
-    width : 25% ;
+    width : 12% ;
 }
 
+#extra {
+	float: right;
+	width: 20%;
+}
 .droppable-active {
 	-webkit-transition:all 0.25s linear;
 	-moz-transition:all 0.25s linear;

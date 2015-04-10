@@ -235,84 +235,98 @@ namespace MakeYourMeal.DAL.Infrastructure
 				{
 					Name = "Crown Bun",
 					AdditionalCharge = new decimal(0),
+					IsRemovable = false,
 					ImagePath = "CrownBun.png"
 				},
 				new Ingredient()
 				{
 					Name = "Heel Bun",
 					AdditionalCharge = new decimal(0),
+					IsRemovable = false,
 					ImagePath = "HeelBun.png"
 				},
 				new Ingredient()
 				{
 					Name = "Pickles",
 					AdditionalCharge = new decimal(0),
+					IsRemovable = true,
 					ImagePath = "Pickels.png"
 				},
 				new Ingredient()
 				{
 					Name = "Lettuce",
 					AdditionalCharge = new decimal(1),
+					IsRemovable = true,
 					ImagePath = "Lettuce.png"
 				},
 				new Ingredient()
 				{
 					Name = "Tomato",
 					AdditionalCharge = new decimal(0),
+					IsRemovable = true,
 					ImagePath = "Tomato.png"
 				},
 				new Ingredient()
 				{
 					Name = "Onion",
 					AdditionalCharge = new decimal(0),
+					IsRemovable = true,
 					ImagePath = "Onion.png"
 				},
 				new Ingredient()
 				{
 					Name = "Cheese",
 					AdditionalCharge = new decimal(0),
+					IsRemovable = true,
 					ImagePath = "Cheese.png"
 				},
 				new Ingredient()
 				{
 					Name = "Mayonnaise",
 					AdditionalCharge = new decimal(0),
+					IsRemovable = true,
 					ImagePath = "Mayonnaise.png"
 				},
 				new Ingredient()
 				{
 					Name = "Ketchup",
 					AdditionalCharge = new decimal(0),
+					IsRemovable = true,
 					ImagePath = "Ketchup.png"
 				},
 				new Ingredient()
 				{
 					Name = "Mustard",
 					AdditionalCharge = new decimal(0),
+					IsRemovable = true,
 					ImagePath = "Mustard.jpg"
 				},
 				new Ingredient()
 				{
 					Name = "Beef",
 					AdditionalCharge = new decimal(1),
+					IsRemovable = false,
 					ImagePath = "Beef.png"
 				},
 				new Ingredient()
 				{
 					Name = "Chicken Fillet",
 					AdditionalCharge = new decimal(1),
+					IsRemovable = false,
 					ImagePath = "ChickenFillet.png"
 				},
 				new Ingredient()
 				{
 					Name = "Grilled Chicken",
 					AdditionalCharge = new decimal(1),
+					IsRemovable = false,
 					ImagePath = "GrilledChicken.png"
 				},
 				new Ingredient()
 				{
 					Name = "Turkey",
 					AdditionalCharge = new decimal(1),
+					IsRemovable = true,
 					ImagePath = "Turkey.jpg"
 				}
 			};
