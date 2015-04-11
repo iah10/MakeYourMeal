@@ -88,10 +88,10 @@
 	</ul>
 </div>
 <script>
-	$(function () {
-		$('.addToOrder').click(function () {
+	$(function() {
+		$('.addToOrder').click(function() {
 			var url = "/Order/AddOrderItem/@Uri.EscapeUriString(Model.Name)";
-			$.post(url, function (data) {
+			$.post(url, function(data) {
 				//Fill div with results
 			});
 		});
@@ -107,37 +107,37 @@
 				opacity: 0.75,
 				tolerance: "pointer",
 				forcePlaceholderSize: true,
-				start: function () {
-					$(fixed, this).each(function () {
+				start: function() {
+					$(fixed, this).each(function() {
 						var $this = $(this);
 						$this.data('pos', $this.index());
 					});
 				},
-				change: function () {
+				change: function() {
 					var $sortable = $(this);
 					var $statics = $(fixed, this).detach();
 					var tagName = $statics.prop('tagName');
 					var $helper = $('<' + tagName + '/>').prependTo(this);
-					$statics.each(function () {
+					$statics.each(function() {
 						var $this = $(this);
 						var target = $this.data('pos');
 						$this.insertAfter($(items, $sortable).eq(target));
 					});
 					$helper.remove();
 				},
-				update: function (e, ui) {
+				update: function(e, ui) {
 					var $sortable = $(this);
 				},
-				stop: function (event, ui) {
+				stop: function(event, ui) {
 					$(this).find('.static:last').appendTo(this);
 				},
-				over : function(){
+				over: function() {
 					$(this).find('.static:last').appendTo(this);
 				},
-				out: function () {
+				out: function() {
 					$(this).find('.static:last').appendTo(this);
 				},
-				moved: function () {
+				moved: function() {
 					$(this).find('.static:last').appendTo(this);
 				}
 			};
@@ -152,17 +152,29 @@
 			opacity: 0.75,
 			containment: "document"
 		});
-	});
+		var foodItem = "@Uri.EscapeUriString(ViewBag.FoodItem)";
+		console.log(foodItem);
 
-	$("#droppable-6").droppable({
-		accept: "#ingredients li",
-		activeClass: "droppable-active",
-		drop: function (event, ui) {
-			$(ui.draggable).remove();
-			var src = "img[src$='" + ui.draggable.find('img').attr('src') + "']";
-			//console.log(src);
-			$('#ingredients').find(src).parent().remove();
-		}
+
+
+		//fill the table
+		$.get("/FoodItems/GetIngredientsForFoodItems/" + foodItem, function (ings) {
+			$.each(ings, function (idx, item) {
+				console.log(item);
+			});
+			//foodItem = new FoodItem.Ingredients(foodItem);
+		}, "json");
+
+		$("#droppable-6").droppable({
+			accept: "#ingredients li",
+			activeClass: "droppable-active",
+			drop: function (event, ui) {
+				$(ui.draggable).remove();
+				var src = "img[src$='" + ui.draggable.find('img').attr('src') + "']";
+				//console.log(src);
+				$('#ingredients').find(src).parent().remove();
+			}
+		});
 	});
 
 </script>
