@@ -53,24 +53,25 @@
 <div id="droppable-6" class="ui-widget-header">
 	<img src="~/Images/Trash.png" class="img-responsive"/>
 </div>
+@* This is temporary for testing purposes *@
 <div id ="extra">
 	<ul id="extraIngredients" class="media-list media-middle text-center">
-		<li class="media-object text-center draggable">
+		<li data-ing-name="Mayonnaise" class="media-object text-center draggable">
 			<img src="/Images/Mayonnaise.png" class="img-responsive center-block" alt="Mayonnaise">
 		</li>
-		<li class="media-object text-center draggable">
+		<li data-ing-name="Cheese" class="media-object text-center draggable">
 			<img src="/Images/Cheese.png" class="img-responsive center-block" alt="Cheese">
 		</li>
-		<li class="media-object text-center draggable">
+		<li data-ing-name="Onion" class="media-object text-center draggable">
 			<img src="/Images/Onion.png" class="img-responsive center-block" alt="Onion">
 		</li>
-		<li class="media-object text-center draggable">
+		<li data-ing-name="Tomato" class="media-object text-center draggable">
 			<img src="/Images/Tomato.png" class="img-responsive center-block" alt="Tomato">
 		</li>
-		<li class="media-object text-center draggable">
+		<li data-ing-name="Lettuce" class="media-object text-center draggable">
 			<img src="/Images/Lettuce.png" class="img-responsive center-block" alt="Lettuce">
 		</li>
-		<li class="media-object text-center draggable">
+		<li data-ing-name="Pickels" class="media-object text-center draggable">
 			<img src="/Images/Pickels.png" class="img-responsive center-block" alt="Pickles">
 		</li>
 	</ul>
@@ -81,14 +82,27 @@
 		{
 			var ingImgPath = path + ing.ImagePath;
 			var nDrag = !ing.IsRemovable ? "static" : "";
-			<li class="media-object text-center @nDrag">
+			<li data-ing-name="@ing.Name" class="media-object text-center @nDrag">
 				<img src="@ingImgPath" class="img-responsive center-block" alt="@ing.Name" />
 			</li>
 		}
 	</ul>
 </div>
 <script>
-	$(function() {
+	$(function ()
+	{
+		//keeps track of the added/removed ingredients
+		var orderItem = {
+			extraIngredients: [],
+			withoutIngredients: [],
+			addIng: function (ingName) {
+				orderItem.extraIngredients.push(ingName);
+			},
+			removeIng: function(ingName) {
+				orderItem.withoutIngredients.push(ingName);
+			}
+		};
+
 		$('.addToOrder').click(function() {
 			var url = "/Order/AddOrderItem/@Uri.EscapeUriString(Model.Name)";
 			$.post(url, function(data) {
@@ -128,8 +142,12 @@
 				update: function(e, ui) {
 					var $sortable = $(this);
 				},
-				stop: function(event, ui) {
+				receive: function (event, ui) {
 					$(this).find('.static:last').appendTo(this);
+					//add the ingredient to the extraIng array of the current orderItem
+					var ingName = ui.item.attr("data-ing-name");
+					orderItem.addIng(ingName);
+					console.log(orderItem);
 				},
 				over: function() {
 					$(this).find('.static:last').appendTo(this);
@@ -152,27 +170,17 @@
 			opacity: 0.75,
 			containment: "document"
 		});
-		var foodItem = "@Uri.EscapeUriString(ViewBag.FoodItem)";
-		console.log(foodItem);
 
-
-
-		//fill the table
-		$.get("/FoodItems/GetIngredientsForFoodItems/" + foodItem, function (ings) {
-			$.each(ings, function (idx, item) {
-				console.log(item);
-			});
-			//foodItem = new FoodItem.Ingredients(foodItem);
-		}, "json");
 
 		$("#droppable-6").droppable({
 			accept: "#ingredients li",
 			activeClass: "droppable-active",
 			drop: function (event, ui) {
 				$(ui.draggable).remove();
-				var src = "img[src$='" + ui.draggable.find('img').attr('src') + "']";
-				//console.log(src);
-				$('#ingredients').find(src).parent().remove();
+				//add the ingredient to the withoutIng array of the current orderItem
+				var ingName = ui.draggable.attr("data-ing-name");
+				orderItem.removeIng(ingName);
+				//console.log(orderItem);
 			}
 		});
 	});

@@ -305,7 +305,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				{
 					Name = "Beef",
 					AdditionalCharge = new decimal(1),
-					IsRemovable = false,
+					IsRemovable = true,
 					ImagePath = "Beef.png"
 				},
 				new Ingredient()

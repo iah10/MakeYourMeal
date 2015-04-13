@@ -27,16 +27,6 @@ namespace MakeYourMeal.Controllers
 			return View(categories);
 		}
 
-		public ActionResult GetIngredientsForFoodItems(string id)
-		{
-			var ingredients = _foodItemService.GetIngredientsForFoodItem(id);
-			return Json(
-				from i in ingredients select new
-				{
-					ingredient = i.Name
-				}, JsonRequestBehavior.AllowGet);
-		}
-
 		// GET: FoodItems/Details/name
 		public ActionResult Details(string id)
 		{
@@ -51,7 +41,6 @@ namespace MakeYourMeal.Controllers
 			}
 			var ingredientsForFoodItem = _foodItemService.GetIngredientsForFoodItem(foodItem.Name);
 			var foodItemVm = new FoodItemAndIgredientsViewModel(foodItem, ingredientsForFoodItem);
-			ViewBag.FoodItem = id;
 			return PartialView("_Details", foodItemVm);
 		}
 

@@ -48,10 +48,8 @@ namespace MakeYourMeal.Controllers
 		public ActionResult AddOrderItem(string id)
 		{
 			int orderId = _orderService.GetCurrentOrderId(this.HttpContext);
-			FoodItem chosenFoodItem = _foodItemService.FindFoodItem(id);
 			OrderItem newItem = new OrderItem
 			{
-				FoodItem = chosenFoodItem,
 				FoodItemName = id,
 				OrderId = orderId
 			};
