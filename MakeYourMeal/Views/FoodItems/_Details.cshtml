@@ -89,25 +89,35 @@
 	</ul>
 </div>
 <script>
-	$(function ()
-	{
+	$(function () {
 		//keeps track of the added/removed ingredients
 		var orderItem = {
 			extraIngredients: [],
 			withoutIngredients: [],
 			addIng: function (ingName) {
-				orderItem.extraIngredients.push(ingName);
+				var a = orderItem.withoutIngredients.indexOf(ingName);
+				//if the item was already removed, adding it now will reset both the without and extra ingredient
+				if (a >= 0) {
+					orderItem.withoutIngredients.splice(a, 1);
+				} else {
+					orderItem.extraIngredients.push(ingName);
+				}
 			},
-			removeIng: function(ingName) {
-				orderItem.withoutIngredients.push(ingName);
+			removeIng: function (ingName) {
+				var a = orderItem.extraIngredients.indexOf(ingName);
+				//if the item was already added, removing it now will reset both the without and extra ingredient
+				if (a >= 0) {
+					orderItem.extraIngredients.splice(a, 1);
+				} else {
+					orderItem.withoutIngredients.push(ingName);
+				}
 			}
 		};
 
-		$('.addToOrder').click(function() {
+		$('.addToOrder').click(function () {
 			var url = "/Order/AddOrderItem/@Uri.EscapeUriString(Model.Name)";
-			$.post(url, function(data) {
-				//Fill div with results
-			});
+			console.log(orderItem.extraIngredients);
+			$.post(url, { extras: orderItem.extraIngredients, without: orderItem.withoutIngredients }, function (data) { });
 		});
 
 		//get config data
@@ -121,25 +131,25 @@
 				opacity: 0.75,
 				tolerance: "pointer",
 				forcePlaceholderSize: true,
-				start: function() {
-					$(fixed, this).each(function() {
+				start: function () {
+					$(fixed, this).each(function () {
 						var $this = $(this);
 						$this.data('pos', $this.index());
 					});
 				},
-				change: function() {
+				change: function () {
 					var $sortable = $(this);
 					var $statics = $(fixed, this).detach();
 					var tagName = $statics.prop('tagName');
 					var $helper = $('<' + tagName + '/>').prependTo(this);
-					$statics.each(function() {
+					$statics.each(function () {
 						var $this = $(this);
 						var target = $this.data('pos');
 						$this.insertAfter($(items, $sortable).eq(target));
 					});
 					$helper.remove();
 				},
-				update: function(e, ui) {
+				update: function (e, ui) {
 					var $sortable = $(this);
 				},
 				receive: function (event, ui) {
@@ -149,13 +159,13 @@
 					orderItem.addIng(ingName);
 					console.log(orderItem);
 				},
-				over: function() {
+				over: function () {
 					$(this).find('.static:last').appendTo(this);
 				},
-				out: function() {
+				out: function () {
 					$(this).find('.static:last').appendTo(this);
 				},
-				moved: function() {
+				moved: function () {
 					$(this).find('.static:last').appendTo(this);
 				}
 			};

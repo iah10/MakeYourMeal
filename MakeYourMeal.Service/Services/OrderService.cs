@@ -19,7 +19,7 @@ namespace MakeYourMeal.Service.Services
 		Order GetOrderById(int orderId);
 		int GetCurrentOrderId(HttpContextBase context);
 		void CommitOrder(HttpContextBase context);
-		void AddToTotalCost(Order order, decimal quantity);
+		void AddToTotalCost(Order order, OrderItem orderItem);
 		void AddOrderItemToOrder(int orderId, OrderItem orderItem);
 		void RemoverOrderItemFromOrder(int orderId, int orderItemId);
 		void ChangeOrderState(Order order, string state);
@@ -84,9 +84,10 @@ namespace MakeYourMeal.Service.Services
 			context.Session[OrderSessionId] = null;
 		}
 
-		public void AddToTotalCost(Order order, decimal quantity)
+		public void AddToTotalCost(Order order, OrderItem orderItem)
 		{
-			order.TotalCost += quantity;
+			order.TotalCost += orderItem.FoodItem.Price;
+			order.TotalCost += orderItem.ExtraIngredients.Sum(extraIng => extraIng.AdditionalCharge);
 			UpdateOrder(order);
 		}
 
@@ -158,7 +159,7 @@ namespace MakeYourMeal.Service.Services
 		{
 			var order = GetOrderById(orderId);
 			_orderItemService.AddNewOrderItem(orderItem);
-			AddToTotalCost(order, orderItem.FoodItem.Price);
+			AddToTotalCost(order, orderItem);
 		}
 
 		public void EmptyOrder(int orderId)

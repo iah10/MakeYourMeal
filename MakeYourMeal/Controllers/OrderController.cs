@@ -7,6 +7,7 @@ using MakeYourMeal.Service.Services;
 using MakeYourMeal.SignalR;
 using MakeYourMeal.ViewModels;
 using Microsoft.AspNet.SignalR;
+using System.Collections.Generic;
 
 namespace MakeYourMeal.Controllers
 {
@@ -17,6 +18,7 @@ namespace MakeYourMeal.Controllers
 
 		private static readonly MakeYourMealEntities _context = new MakeYourMealEntities();
 		private readonly IOrderService _orderService = new OrderService(_context);
+		private readonly IIngridientService _ingredientService = new IngredientService(_context);
 		private readonly IOrderItemService _orderItemService = new OrderItemService(_context);
 		private readonly IFoodItemService _foodItemService = new FoodItemService(_context);
 		protected readonly Lazy<IHubContext> AdminHub = new Lazy<IHubContext>(() => GlobalHost.ConnectionManager.GetHubContext<AdminHub>());
@@ -47,12 +49,43 @@ namespace MakeYourMeal.Controllers
 
 		public ActionResult AddOrderItem(string id)
 		{
+			var ing = Request.Form;
+			string extras = String.Empty;
+			string without = String.Empty;
+
 			int orderId = _orderService.GetCurrentOrderId(this.HttpContext);
 			OrderItem newItem = new OrderItem
 			{
 				FoodItemName = id,
-				OrderId = orderId
+				FoodItem = _foodItemService.FindFoodItem(id),
+				OrderId = orderId,
+
 			};
+
+			if (ing != null)
+			{
+				foreach (string key in ing.AllKeys)
+				{
+					if (key.Equals("extras[]"))
+					{
+						extras = Request.Form[key];
+						string [] array = extras.Split(',');
+						foreach (string ingredient in array)
+						{
+							newItem.ExtraIngredients.Add(_ingredientService.FindIngredient(ingredient));
+						}
+					}else if(key.Equals("without[]"))
+					{
+						without = Request.Form[key];
+						string[] array = without.Split(',');
+						foreach (string ingredient in array)
+						{
+							newItem.WithoutIngredients.Add(_ingredientService.FindIngredient(ingredient));
+						}
+					}
+				}
+			}
+
 			_orderService.AddOrderItemToOrder(orderId, newItem);
 			return Json(true, JsonRequestBehavior.AllowGet);
 		}
@@ -87,7 +120,7 @@ namespace MakeYourMeal.Controllers
 			Order currentOrder = _orderService.GetOrderById(id);
 			_orderService.ChangeOrderState(currentOrder, OrderState.READY_STATE);
 			//look up table connection Id
-			string connectionId = CustomersHub.GetConnectionId(currentOrder.TableNumber+"");
+			string connectionId = CustomersHub.GetConnectionId(currentOrder.TableNumber + "");
 			CustomersHubb.Value.Clients.Client(connectionId).orderStateChanged(OrderState.READY_STATE);
 			return RedirectToAction("Index");
 		}
