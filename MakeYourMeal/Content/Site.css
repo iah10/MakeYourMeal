@@ -4,6 +4,15 @@
 	padding-right: 0;
 }
 
+
+#extraIngredients {
+    padding-left : 0px ;
+}
+
+.collapse{
+  //  background-color: rgb(140,140,140) ;
+   // border-color: rgb(200, 200, 200) ; 
+}
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
