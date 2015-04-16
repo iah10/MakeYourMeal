@@ -8,12 +8,10 @@
 	const string path = "/Images/";
 }
 
-<h2>
+<h2 class="floatL">
 	@{
 		var imagePath = path + Model.ImagePath;
-		<div class="floatL">
-			<img src="@imagePath" alt="@Model.Name" />
-		</div>
+		<img src="@imagePath" alt="@Model.Name" />
 	}
 </h2>
 
@@ -40,7 +38,7 @@
 		</dt>
 
 		<dd>
-			@Html.DisplayFor(model => model.Price) <text>L.L</text>
+			@Html.DisplayFor(model => model.Price) <text>L.P.</text>
 		</dd>
 		<dt> Add To Order</dt>
 		<dd> <button type="button" class="btn btn-default addToOrder">Add To Order</button> </dd>
@@ -99,11 +97,13 @@
 			withoutIngredients: [],
 			addIng: function (ingName) {
 				var a = orderItem.withoutIngredients.indexOf(ingName);
-				//if the item was already removed, adding it now will reset both the without and extra ingredient
-				if (a >= 0) {
-					orderItem.withoutIngredients.splice(a, 1);
-				} else {
-					orderItem.extraIngredients.push(ingName);
+				if (orderItem.extraIngredients.indexOf(ingName) < 3) {
+					//if the item was already removed, adding it now will reset both the without and extra ingredient
+					if (a >= 0) {
+						orderItem.withoutIngredients.splice(a, 1);
+					} else {
+						orderItem.extraIngredients.push(ingName);
+					}
 				}
 			},
 			removeIng: function (ingName) {

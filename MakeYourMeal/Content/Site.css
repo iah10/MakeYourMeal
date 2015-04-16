@@ -10,8 +10,8 @@
 }
 
 .collapse{
-  //  background-color: rgb(140,140,140) ;
-   // border-color: rgb(200, 200, 200) ; 
+	/*background-color: rgb(140,140,140) ;
+	border-color: rgb(200, 200, 200) ;*/ 
 }
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
@@ -344,6 +344,7 @@ html { height: 100%;}
   -webkit-transform: translate3d(-100px,0,0);
   -webkit-transition: all .35s ease-in-out;
 }
+/********************************************/
 
 #plate {
 	padding-left: 80px;
@@ -353,4 +354,19 @@ html { height: 100%;}
 .images-style {
 	width: 100px;		/*ratio = 11.29 to page-content-wrapper*/
 	height: 25px;		/*ratio = 22.92*/
+}
+
+.badge-notify{
+   background:red;
+   position:absolute;
+   top:10px;
+   left: 37px;
+}
+
+.food-items-list{
+	box-shadow: 0px 0px 1px 0px #111;
+}
+
+.my-order a:link{
+	text-decoration: none;
 }
