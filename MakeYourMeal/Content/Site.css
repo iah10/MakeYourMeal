@@ -133,6 +133,13 @@ html { height: 100%;}
     list-style: none;
 }
 
+.sidebar-nav a{
+	display: block;
+    color: #ddd;
+    text-decoration: none;
+    padding: 10px 15px 10px 30px;  
+}
+
 .sidebar-nav li {
     position: relative; 
     line-height: 20px;
@@ -156,32 +163,28 @@ html { height: 100%;}
 	transition: width .2s ease-in;
 }
 
-.sidebar-nav li:first-child a {
-    color: #fff;
-    background-color: #1a1a1a;
+.sidebar-nav li:nth-child(1):before {
+    background-color: #a5b747;   
 }
 .sidebar-nav li:nth-child(2):before {
-    background-color: #ec1b5a;   
+    background-color: #f18d41;   
 }
 .sidebar-nav li:nth-child(3):before {
-    background-color: #79aefe;   
+    background-color: #1eadb6;   
 }
 .sidebar-nav li:nth-child(4):before {
-    background-color: #314190;   
+    background-color: #FAF678;   
 }
 .sidebar-nav li:nth-child(5):before {
-    background-color: #279636;   
+    background-color: #3CD66A;   
 }
 .sidebar-nav li:nth-child(6):before {
-    background-color: #7d5d81;   
+    background-color: #D6D13A;   
 }
-.sidebar-nav li:nth-child(7):before {
+.sidebar-nav li:nth-child(7):before {	/*not changed*/
     background-color: #ead24c;   
 }
-.sidebar-nav li:nth-child(8):before {
-    background-color: #2d2366;   
-}
-.sidebar-nav li:nth-child(9):before {
+.sidebar-nav li:nth-child(8):before {	/*not changed*/
     background-color: #35acdf;   
 }
 .sidebar-nav li:hover:before,
@@ -364,9 +367,67 @@ html { height: 100%;}
 }
 
 .food-items-list{
-	box-shadow: 0px 0px 1px 0px #111;
+	/*-shadow: 0px 0px 1px 0px #111;*/
 }
 
 .my-order a:link{
 	text-decoration: none;
+}
+
+.menu-left-style{
+	background: #785c55 !important;
+	background-color: transparent;
+	background-image: url("zenbg-3.png"), url("zenbg-4.png") !important;
+	background-repeat: repeat-x, repeat !important;
+}
+
+.navbar-top-style{
+	background: #503331 !important;
+	background-image: url("zenbg-1.png"), url("zenbg-2.png") !important;
+	background-repeat: repeat-x, repeat !important;
+}
+
+.menu-title {
+	font-size: 25px;
+}
+
+.subitems-list{
+	background: #b3817b !important;
+	background-image: url("zenbg-5.png"), url("zenbg-6.png") !important;
+	background-repeat: repeat-x, repeat !important;
+}
+
+.ingredient-list{
+	background: #4e4242 !important;
+	background-image: url("zenbg-7.png"), url("zenbg-8.png") !important;
+	background-repeat: repeat-x, repeat !important;
+}
+
+.myorder-page{
+	overflow-y:visible;
+	background: #b3817b !important;
+	background-image: url("zenbg-5.png"), url("zenbg-6.png") !important;
+	background-repeat: repeat-x, repeat !important;
+}
+
+.myorder-page-container{
+	color: #fff;	
+	padding: 4%;
+}
+
+.myorder-page-container h1{
+	color: #D38F68;
+}
+
+.myorder-page-container h3{
+	padding-left: 20px;
+}
+
+.myorder-page-container li{
+	list-style-type: none;
+}
+
+.myorder-page-container a{
+	text-decoration: none;
+	color: #D38F68;
 }

@@ -6,17 +6,17 @@
 
 <div id="wrapper">
 	<!-- Sidebar -->
-	<nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
-		<ul class="nav sidebar-nav">
-			<li class="sidebar-brand">
-				<a>Menu</a>
-			</li>
+	<nav class="navbar navbar-fixed-top menu-left-style" id="sidebar-wrapper" role="navigation">
+		<div class="nav sidebar-nav food-items-list menu-title">
+			<a>Menu</a>
+		</div>
+		<ul class="nav sidebar-nav food-items-list">
 
 			@foreach (var item in Model)
 			{
-				<li class="dropdown food-items-list">
+				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">@item.CategoryName</a>
-					<ul class="dropdown-menu" role="menu">
+					<ul class="dropdown-menu subitems-list" role="menu">
 						<li>
 							@foreach (var subitem in item.FoodItems)
 							{

@@ -2,107 +2,108 @@
 @model IEnumerable<MakeYourMeal.Data.Models.Order>
 
 @{
-    ViewBag.Title = "My Order";
-    int i = 1;
+	ViewBag.Title = "My Order";
+	int i = 1;
 }
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Order</title>
+	<title>My Order</title>
 </head>
-<body style="overflow-y:visible;">
-    <h1>My Orders</h1>
+<body class="myorder-page">
+	<div class="myorder-page-container">
+		<h1>My Orders</h1>
 
-    <h2>Orders In Progress</h2>
+		@{
+			foreach (var order in Model)
+			{
+				<h3> Order @i</h3>
+				<div>
+					<dl class="dl-horizontal ">
+						<dt>
+							@Html.DisplayNameFor(o => o.TableNumber)
+						</dt>
 
-    @{
-        foreach (var order in Model)
-        {
-            <h3> Order @i</h3>
-            <div>
-                <dl class="dl-horizontal">
-                    <dt>
-                        @Html.DisplayNameFor(o => o.TableNumber)
-                    </dt>
+						<dd>
+							@Html.DisplayFor(o => order.TableNumber)
+						</dd>
 
-                    <dd>
-                        @Html.DisplayFor(o => order.TableNumber)
-                    </dd>
+						<dt>
+							@Html.DisplayNameFor(o => o.OrderedAt)
+						</dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(o => o.OrderedAt)
-                    </dt>
+						<dd>
+							@Html.DisplayFor(o => order.OrderedAt)
+						</dd>
 
-                    <dd>
-                        @Html.DisplayFor(o => order.OrderedAt)
-                    </dd>
+						<dt>
+							@Html.DisplayNameFor(o => o.TotalCost)
+						</dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(o => o.TotalCost)
-                    </dt>
+						<dd>
+							@Html.DisplayFor(o => order.TotalCost)
+						</dd>
 
-                    <dd>
-                        @Html.DisplayFor(o => order.TotalCost)
-                    </dd>
+						<dt>
+							@Html.DisplayNameFor(o => o.State)
+						</dt>
 
-                    <dt>
-                        @Html.DisplayNameFor(o => o.State)
-                    </dt>
+						<dd>
+							@Html.DisplayFor(o => order.State)
+						</dd>
 
-                    <dd>
-                        @Html.DisplayFor(o => order.State)
-                    </dd>
+					</dl>
+				</div>
+			
+				<h3>Order Items</h3>
+				<ul>
+					@foreach (var ing in order.OrderItems)
+					{
+						<li> @ing.FoodItemName</li>
+						if (order.OrderState.State.Equals(OrderState.NEW_ORDER))
+						{
 
-                </dl>
-            </div>
-            <h3>Order Items</h3>
-            <ul>
-                @foreach (var ing in order.OrderItems)
-                {
-                    <li> @ing.FoodItemName</li>
-                    if (order.OrderState.State.Equals(OrderState.NEW_ORDER))
-                    {
+							<span>@Html.ActionLink("Delete Order Item", "DeleteOrderItem", new { id = ing.OrderItemId }, htmlAttributes: new { @class = "btn", @role = "button" })</span>
+							<span>@Html.ActionLink("Add Lettuce", "AddExtraIngredient", new { orderItem = ing.OrderItemId, ingName = "Lettuce" }, htmlAttributes: new { @class = "btn", @role = "button" })</span>
+							<span>@Html.ActionLink("Remove Pickles", "RemoveIngredient", new { orderItem = ing.OrderItemId, ingName = "Mayonnaise" }, htmlAttributes: new { @class = "btn", @role = "button" })</span>
+						}
+					}
+				</ul>
+				if (order.OrderState.State.Equals(OrderState.NEW_ORDER))
+				{
+					@Html.ActionLink("Commit Order", "CommitCurrentOrder")
+				}
+			}
+		}
+		<p>
+			@Html.ActionLink("Back to List", "Index", "FoodItems", htmlAttributes: new { @class = "btn", @role = "button" })
+		</p>
+	</div>
 
-                        <span>@Html.ActionLink("Delete Order Item", "DeleteOrderItem", new { id = ing.OrderItemId })</span>
-                        <span>@Html.ActionLink("Add Lettuce", "AddExtraIngredient", new { orderItem = ing.OrderItemId, ingName = "Lettuce" })</span>
-                        <span>@Html.ActionLink("Remove Pickles", "RemoveIngredient", new { orderItem = ing.OrderItemId, ingName = "Mayonnaise" })</span>
-                    }
-                }
-            </ul>
-            if (order.OrderState.State.Equals(OrderState.NEW_ORDER))
-            {
-                @Html.ActionLink("Commit Order", "CommitCurrentOrder")
-            }
-        }
-    }
-    <p>
-        @Html.ActionLink("Back to List", "Index", "FoodItems")
-    </p>
-
-    @section scripts
+	@section scripts
 {
 
-        <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
-        <script type="text/javascript" src="~/signalr/hubs"></script>
-        <script src="~/Scripts/knockout-3.3.0.js"></script>
-        <script src="~/Scripts/toastr.min.js"></script>
-        <script>
-            $(function () {
+		<script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+		<script type="text/javascript" src="~/signalr/hubs"></script>
+		<script src="~/Scripts/knockout-3.3.0.js"></script>
+		<script src="~/Scripts/toastr.min.js"></script>
+		<script>
+			$(function () {
 
-                //start hub
-                var hub = $.connection.customersHub;
+				//start hub
+				var hub = $.connection.customersHub;
 
-                //order receivied
-                hub.client.orderStateChanged = function (state) {
-                    toastr.info("Your Order Is Now " + state);
-                }
+				//order receivied
+				hub.client.orderStateChanged = function (state) {
+					toastr.info("Your Order Is Now " + state);
+				}
 
-                //start real time connection
-                $.connection.hub.start().done(function () {
-                    hub.server.registerConId(@ViewBag.TableNumber);
-                });
-            });
-        </script>
-    }
+				//start real time connection
+				$.connection.hub.start().done(function () {
+					hub.server.registerConId(@ViewBag.TableNumber);
+				});
+			});
+		</script>
+	}
 </body>
 </html>
