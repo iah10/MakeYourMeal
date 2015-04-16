@@ -63,7 +63,7 @@
 						@ing.FoodItemName
 						@if (order.OrderState.State.Equals(OrderState.NEW_ORDER))
 						{
-							<span>@Html.ActionLink("Delete", "DeleteOrderItem", new { id = ing.OrderItemId })</span>
+							<span>@Html.ActionLink("Delete", "DeleteOrderItem", new { id = ing.OrderItemId }, new { @class = "delete", id = ing.OrderItemId })</span>
 						}
 					</li>
 				}
@@ -83,7 +83,6 @@
 
         <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
         <script type="text/javascript" src="~/signalr/hubs"></script>
-        <script src="~/Scripts/knockout-3.3.0.js"></script>
         <script src="~/Scripts/toastr.min.js"></script>
         <script>
             $(function () {
@@ -100,6 +99,21 @@
                 $.connection.hub.start().done(function () {
                     hub.server.registerConId(@ViewBag.TableNumber);
                 });
+
+            	//get the orderItems count
+            	$.get("/Order/GetCountOfCurrentOrder", function (count) {
+            		viewModel.numberOfNoti(count);
+            	}, "json");
+
+
+            	$('.delete').click(function () {
+            		$(this).parent().parent().remove();
+            		$.post(this.href, function (result) {
+            			viewModel.numberOfNoti(viewModel.numberOfNoti()-1);
+            		});
+		            return false;
+	            });
+
             });
         </script>
     }

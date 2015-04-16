@@ -17,11 +17,12 @@ else
 {
 	<ul class="nav navbar-nav navbar-right">
 		<li>
-			<button class="btn btn-default btn-lg btn-link my-order" style="font-size:25px;">
-				<span>@Html.ActionLink(" ", "MyOrder", "Order", routeValues: null, htmlAttributes: new { @class = "glyphicon glyphicon-shopping-cart" })</span>
+			<button class="btn btn-default btn-lg btn-link my-order" style="font-size: 25px;">
+				<span>@Html.ActionLink(" ", "MyOrder", "Order", routeValues: null, htmlAttributes:
+					      new {@class = "glyphicon glyphicon-shopping-cart"})</span>
 			</button>
-				<span class="badge badge-notify">3</span>
-		</li>
+			<span data-bind="visible: numberOfNoti() >0"><span class="badge badge-notify" data-bind="text: numberOfNoti"></span></span>
+		</li> 
 		@*<li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new {id = "registerLink"})</li>*@
 		<li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
 	</ul>

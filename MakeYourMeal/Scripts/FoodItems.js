@@ -53,4 +53,9 @@
 				$("#plate").html(data);
 			});
 	});
+
+	//get the orderItems count
+	$.get("/Order/GetCountOfCurrentOrder", function (count) {
+		viewModel.numberOfNoti(count);
+	}, "json");
 });

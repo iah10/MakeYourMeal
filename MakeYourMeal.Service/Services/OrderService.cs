@@ -18,6 +18,7 @@ namespace MakeYourMeal.Service.Services
 		IEnumerable<OrderItem> GetOrderItemsForOrder(int orderId);
 		Order GetOrderById(int orderId);
 		int GetCurrentOrderId(HttpContextBase context);
+		int GetOrderItemsCount(int orderId);
 		void CommitOrder(HttpContextBase context);
 		void AddToTotalCost(Order order, OrderItem orderItem);
 		void AddOrderItemToOrder(int orderId, OrderItem orderItem);
@@ -74,6 +75,12 @@ namespace MakeYourMeal.Service.Services
 				context.Session[OrderSessionId] = newOrder.OrderId;
 			}
 			return Int32.Parse(context.Session[OrderSessionId].ToString());
+		}
+
+		public int GetOrderItemsCount(int orderId)
+		{
+			Order currOrder = GetOrderById(orderId);
+			return currOrder.OrderItems.Count;
 		}
 
 		public void CommitOrder(HttpContextBase context)
