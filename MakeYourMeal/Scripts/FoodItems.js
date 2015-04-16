@@ -42,6 +42,7 @@
 
 	//some events
 	$(".updatePage").click(function () {
+		//$(this).parent().parent().parent().toggleClass("open", "!important");
 		//get the category id
 		var id = $(this).attr("id");
 		var url = "/FoodItems/Details/" + id;
