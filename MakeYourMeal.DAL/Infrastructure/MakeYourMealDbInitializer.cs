@@ -312,7 +312,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				{
 					Name = "Chicken Fillet",
 					AdditionalCharge = new decimal(1),
-					IsRemovable = false,
+					IsRemovable = true,
 					ImagePath = "ChickenFillet.png"
 				},
 				new Ingredient()

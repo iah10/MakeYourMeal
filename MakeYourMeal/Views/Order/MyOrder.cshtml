@@ -58,16 +58,15 @@
             <h3>Order Items</h3>
             <ul>
                 @foreach (var ing in order.OrderItems)
-                {
-                    <li> @ing.FoodItemName</li>
-                    if (order.OrderState.State.Equals(OrderState.NEW_ORDER))
-                    {
-
-                        <span>@Html.ActionLink("Delete Order Item", "DeleteOrderItem", new { id = ing.OrderItemId })</span>
-                        <span>@Html.ActionLink("Add Lettuce", "AddExtraIngredient", new { orderItem = ing.OrderItemId, ingName = "Lettuce" })</span>
-                        <span>@Html.ActionLink("Remove Pickles", "RemoveIngredient", new { orderItem = ing.OrderItemId, ingName = "Mayonnaise" })</span>
-                    }
-                }
+				{
+					<li>
+						@ing.FoodItemName
+						@if (order.OrderState.State.Equals(OrderState.NEW_ORDER))
+						{
+							<span>@Html.ActionLink("Delete", "DeleteOrderItem", new { id = ing.OrderItemId })</span>
+						}
+					</li>
+				}
             </ul>
             if (order.OrderState.State.Equals(OrderState.NEW_ORDER))
             {
@@ -79,7 +78,7 @@
         @Html.ActionLink("Back to List", "Index", "FoodItems")
     </p>
 
-    @section scripts
+@section scripts
 {
 
         <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
