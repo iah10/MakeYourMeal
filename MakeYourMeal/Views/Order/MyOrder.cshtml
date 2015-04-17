@@ -17,64 +17,85 @@
 		@{
 			foreach (var order in Model)
 			{
-				<h3> Order @i</h3>
-				<div>
-					<dl class="dl-horizontal ">
-						<dt>
-							@Html.DisplayNameFor(o => o.TableNumber)
-						</dt>
+				<div class="sheet-container">
+					<h3> Order @i</h3>
 
-						<dd>
-							@Html.DisplayFor(o => order.TableNumber)
-						</dd>
-
-						<dt>
-							@Html.DisplayNameFor(o => o.OrderedAt)
-						</dt>
-
-						<dd>
-							@Html.DisplayFor(o => order.OrderedAt)
-						</dd>
-
-						<dt>
-							@Html.DisplayNameFor(o => o.TotalCost)
-						</dt>
-
-						<dd>
-							@Html.DisplayFor(o => order.TotalCost)
-						</dd>
-
-						<dt>
-							@Html.DisplayNameFor(o => o.State)
-						</dt>
-
-						<dd>
-							@Html.DisplayFor(o => order.State)
-						</dd>
-
-					</dl>
-				</div>
-			
-				<h3>Order Items</h3>
-				<ul>
-					@foreach (var ing in order.OrderItems)
-					{
-						<li> @ing.FoodItemName</li>
-						if (order.OrderState.State.Equals(OrderState.NEW_ORDER))
+					<ul>
+						@foreach (var ing in order.OrderItems)
 						{
+							<li> 
+								<span>@ing.FoodItemName</span>
 
-							<span>@Html.ActionLink("Delete Order Item", "DeleteOrderItem", new { id = ing.OrderItemId }, htmlAttributes: new { @class = "btn", @role = "button" })</span>
-							<span>@Html.ActionLink("Add Lettuce", "AddExtraIngredient", new { orderItem = ing.OrderItemId, ingName = "Lettuce" }, htmlAttributes: new { @class = "btn", @role = "button" })</span>
-							<span>@Html.ActionLink("Remove Pickles", "RemoveIngredient", new { orderItem = ing.OrderItemId, ingName = "Mayonnaise" }, htmlAttributes: new { @class = "btn", @role = "button" })</span>
+								<p>+ Extra(
+									@foreach (var change in @ing.ExtraIngredients)
+									{
+										<span>@change.Name</span>
+									})
+								</p>
+
+								<p>- Without(
+									@foreach (var change in @ing.WithoutIngredients)
+									{
+										<span>@change.Name</span>
+									})
+								</p>
+							</li>
+							
+							if (order.OrderState.State.Equals(OrderState.NEW_ORDER))
+							{
+
+								<span>@Html.ActionLink("Delete Order Item", "DeleteOrderItem", new { id = ing.OrderItemId }, htmlAttributes: new { @class = "btn", @role = "button" })</span>
+							}
 						}
+					</ul>
+
+					<div>
+						<dl class="dl-horizontal ">
+							<dt>
+								@Html.DisplayNameFor(o => o.TableNumber)
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(o => order.TableNumber)
+							</dd>
+
+							<dt>
+								@Html.DisplayNameFor(o => o.OrderedAt)
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(o => order.OrderedAt)
+							</dd>
+
+							<dt>
+								@Html.DisplayNameFor(o => o.TotalCost)
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(o => order.TotalCost)
+							</dd>
+
+							<dt>
+								@Html.DisplayNameFor(o => o.State)
+							</dt>
+
+							<dd>
+								@Html.DisplayFor(o => order.State)
+							</dd>
+
+						</dl>
+					</div>
+
+					@if (order.OrderState.State.Equals(OrderState.NEW_ORDER))
+					{
+						@Html.ActionLink("Commit Order", "CommitCurrentOrder")
 					}
-				</ul>
-				if (order.OrderState.State.Equals(OrderState.NEW_ORDER))
-				{
-					@Html.ActionLink("Commit Order", "CommitCurrentOrder")
-				}
+				</div>
 			}
 		}
+	</div>
+
+	<div class="footer">
 		<p>
 			@Html.ActionLink("Back to List", "Index", "FoodItems", htmlAttributes: new { @class = "btn", @role = "button" })
 		</p>
