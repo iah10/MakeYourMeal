@@ -241,6 +241,12 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
+    <Content Include="Content\ZenBG-3.png" />
+    <Content Include="Content\ZenBG-4.png" />
+    <Content Include="Content\ZenBG-5.png" />
+    <Content Include="Content\ZenBG-6.png" />
+    <Content Include="Content\ZenBG-7.png" />
+    <Content Include="Content\ZenBG-8.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -258,6 +264,8 @@
     <Content Include="Images\Pickels.png" />
     <Content Include="Images\Tomato.png" />
     <Content Include="Images\Trash.png" />
+    <Content Include="Content\ZenBG-1.png" />
+    <Content Include="Content\ZenBG-2.png" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
