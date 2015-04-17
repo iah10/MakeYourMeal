@@ -91,6 +91,7 @@
 </div>
 <script>
 	$(function () {
+		//console.log(viewModel.numberOfNoti());
 		//keeps track of the added/removed ingredients
 		var orderItem = {
 			extraIngredients: [],
@@ -119,9 +120,12 @@
 
 		$('.addToOrder').click(function () {
 			var url = "/Order/AddOrderItem/@Uri.EscapeUriString(Model.Name)";
-			console.log(orderItem.extraIngredients);
-			$.post(url, { extras: orderItem.extraIngredients, without: orderItem.withoutIngredients }, function (data) { });
+			$.post(url, { extras: orderItem.extraIngredients, without: orderItem.withoutIngredients }, function(data) {
+				viewModel.numberOfNoti(viewModel.numberOfNoti()+1);
+			});
 		});
+
+	
 
 		//get config data
 		function config(fixed, items) {

@@ -95,7 +95,7 @@ namespace MakeYourMeal.Controllers
 		{
 			int currentTableNumber = OrderService.GetCurrentTableNumber(this.HttpContext);
 			var orders = _orderService.GetNewOrCommitedOrdersForTableNum(currentTableNumber);
-			ViewBag.TableNumber = OrderService.GetCurrentTableNumber(this.HttpContext);
+			ViewBag.TableNumber = currentTableNumber;
 			return View(orders);
 		}
 
@@ -145,22 +145,14 @@ namespace MakeYourMeal.Controllers
 		{
 			int orderId = _orderService.GetCurrentOrderId(this.HttpContext);
 			_orderService.RemoverOrderItemFromOrder(orderId, id);
-			return RedirectToAction("Index");
+			return Json(true, JsonRequestBehavior.AllowGet);
 		}
 
-		public ActionResult AddExtraIngredient(int orderItem, string ingName)
+		public ActionResult GetCountOfCurrentOrder()
 		{
-			_orderItemService.AddExtraIngredientForOrderItem(orderItem, ingName);
-			int orderId = _orderService.GetCurrentOrderId(this.HttpContext);
-			Order cuurentOrder = _orderService.GetOrderById(orderId);
-			_orderService.CalculateTotalCost(cuurentOrder);
-			return RedirectToAction("Index");
-		}
-
-		public ActionResult RemoveIngredient(int orderItem, string ingName)
-		{
-			_orderItemService.RemoveIngredientForOrderItem(orderItem, ingName);
-			return RedirectToAction("Index");
+			var orderId = _orderService.GetCurrentOrderId(this.HttpContext);
+			int count = _orderService.GetOrderItemsCount(orderId);
+			return Json(count, JsonRequestBehavior.AllowGet);
 		}
 
 		private OrderViewModel GetOrderViewModelForOrder(Order order)
