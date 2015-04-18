@@ -472,6 +472,7 @@ html {
 	background: #b3817b !important;
 	background-image: url("/Images/zenbg-6.png") !important;
 	background-repeat: repeat !important;
+	height: 100%;
 }
 
 .myorder-page-container {
