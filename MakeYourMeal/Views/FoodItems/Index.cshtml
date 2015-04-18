@@ -21,7 +21,10 @@
 						<li>
 							@foreach (var subitem in item.FoodItems)
 							{
-								<a href="#" class="updatePage" id=@Uri.EscapeUriString(subitem.Name)>@subitem.Name</a>
+								<a href="#" class="updatePage" id=@Uri.EscapeUriString(subitem.Name)>
+									<img src="~/Images/@subitem.ImagePath" height="40" width="53" />
+									@subitem.Name
+								</a>
 							}
 						</li>
 					</ul>
@@ -31,7 +34,7 @@
 	</nav>
 	<!-- /#sidebar-wrapper -->
 	<!-- Page Content -->
-	<div id="page-content-wrapper" class="panel-body">
+	<div id="page-content-wrapper" class="panel-body dark-background">
 		<button type="button" class="hamburger is-open" data-toggle="offcanvas">
 			<span class="hamb-top"></span>
 			<span class="hamb-middle"></span>

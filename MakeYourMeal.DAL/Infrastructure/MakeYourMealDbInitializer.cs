@@ -59,7 +59,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 			{
 				Name = "Chicken Fillet",
 				CategoryName = Category.CHICKEN,
-				ImagePath = "ChickenFillet.jpg",
+				ImagePath = "ChickenFilletBurger.png",
 				Price = new decimal(11.5)
 			};
 
@@ -128,7 +128,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 			{
 				Name = "Big Deluxe",
 				CategoryName = Category.CHARBROILED_BURGERS,
-				ImagePath = "BigDeluxe.jpg",
+				ImagePath = "BigDeluxe.png",
 				Price = new decimal(12.5)
 			};
 

@@ -241,6 +241,12 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
+    <Content Include="Images\background-ing.jpg" />
+    <Content Include="Images\background-light.jpg" />
+    <Content Include="Images\background.jpg" />
+    <Content Include="Images\BigDeluxe.png" />
+    <Content Include="Images\ChickenFilletBurger.png" />
+    <Content Include="Images\logo.png" />
     <Content Include="Images\ZenBG-10.png" />
     <Content Include="Images\ZenBG-6.png" />
     <Content Include="Images\ZenBG-7.png" />
@@ -251,9 +257,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\Beef.png" />
-    <Content Include="Images\BigDeluxe.jpg" />
     <Content Include="Images\Cheese.png" />
-    <Content Include="Images\ChickenFillet.jpg" />
     <Content Include="Images\ChickenFillet.png" />
     <Content Include="Images\CrownBun.png" />
     <Content Include="Images\HeelBun.png" />

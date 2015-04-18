@@ -53,29 +53,29 @@
 </div>
 @* This is temporary for testing purposes *@
 <div id="extra" class="MainMenu">
-    <div class="list-group panel">
+	<div class="list-group panel ingredients-style">
 		<a href="#extraIngredients" class="list-group-item list-group-item-success ingredient-list" data-toggle="collapse" style=" background-color: rgb(26, 26, 26); color : white ;">Add Ingredients</a>
-        <ul id="extraIngredients" class="collapse">
-            <li data-ing-name="Mayonnaise" class="media-object text-center draggable">
-                <img src="/Images/Mayonnaise.png" class="img-responsive center-block" alt="Mayonnaise">
-            </li>
-            <li data-ing-name="Cheese" class="media-object text-center draggable">
-                <img src="/Images/Cheese.png" class="img-responsive center-block" alt="Cheese">
-            </li>
-            <li data-ing-name="Onion" class="media-object text-center draggable">
-                <img src="/Images/Onion.png" class="img-responsive center-block" alt="Onion">
-            </li>
-            <li data-ing-name="Tomato" class="media-object text-center draggable">
-                <img src="/Images/Tomato.png" class="img-responsive center-block" alt="Tomato">
-            </li>
-            <li data-ing-name="Lettuce" class="media-object text-center draggable">
-                <img src="/Images/Lettuce.png" class="img-responsive center-block" alt="Lettuce">
-            </li>
-            <li data-ing-name="Pickels" class="media-object text-center draggable">
-                <img src="/Images/Pickels.png" class="img-responsive center-block" alt="Pickles">
-            </li>
-        </ul>
-        </div>
+		<ul id="extraIngredients" class="collapse">
+			<li data-ing-name="Mayonnaise" class="media-object text-center draggable">
+				<img src="/Images/Mayonnaise.png" class="img-responsive center-block" alt="Mayonnaise">
+			</li>
+			<li data-ing-name="Cheese" class="media-object text-center draggable">
+				<img src="/Images/Cheese.png" class="img-responsive center-block" alt="Cheese">
+			</li>
+			<li data-ing-name="Onion" class="media-object text-center draggable">
+				<img src="/Images/Onion.png" class="img-responsive center-block" alt="Onion">
+			</li>
+			<li data-ing-name="Tomato" class="media-object text-center draggable">
+				<img src="/Images/Tomato.png" class="img-responsive center-block" alt="Tomato">
+			</li>
+			<li data-ing-name="Lettuce" class="media-object text-center draggable">
+				<img src="/Images/Lettuce.png" class="img-responsive center-block" alt="Lettuce">
+			</li>
+			<li data-ing-name="Pickels" class="media-object text-center draggable">
+				<img src="/Images/Pickels.png" class="img-responsive center-block" alt="Pickles">
+			</li>
+		</ul>
+	</div>
 </div>
 <div id="drag-container">
 	<ul id="ingredients"  class="media-list media-middle text-center">
@@ -91,6 +91,8 @@
 </div>
 <script>
 	$(function () {
+		$("#page-content-wrapper").removeClass("dark-background");
+		$("#page-content-wrapper").addClass("light-background");
 		//console.log(viewModel.numberOfNoti());
 		//keeps track of the added/removed ingredients
 		var orderItem = {

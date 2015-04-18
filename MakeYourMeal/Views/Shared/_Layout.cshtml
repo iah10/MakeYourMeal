@@ -12,11 +12,12 @@
 	<div class="navbar navbar-inverse navbar-fixed-top navbar-top-style">
 		<div class="container">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
+				<img class="logo-position" src="~/Images/logo.png" alt="Burger Shop" />
+				@*<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar">1</span>
+					<span class="icon-bar">2</span>
+					<span class="icon-bar">3</span>
+				</button>*@
 				@Html.ActionLink("Burger Shop", "Index", "FoodItems", null, new { @class = "navbar-brand" })
 			</div>
 			<div class="navbar-collapse collapse">
@@ -24,7 +25,7 @@
 			</div>
 		</div>
 	</div>
-	<div>
+	<div class="fit-all">
 		@RenderBody()
 		@*<footer>
 				<p>&copy; @DateTime.Now.Year - Burger Shop</p>
