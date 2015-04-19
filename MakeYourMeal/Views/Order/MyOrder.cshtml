@@ -73,12 +73,12 @@
 					}
 				</ul>
 
-				<div class="btn-default">
+				<button class="btn-default">
 					@if (order.OrderState.State.Equals(OrderState.NEW_ORDER))
 					{
 						@Html.ActionLink("Commit Order", "CommitCurrentOrder")
 					}
-				</div>
+				</button>
 			</div>
 		}
 	</div>
