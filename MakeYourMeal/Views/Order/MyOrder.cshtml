@@ -45,6 +45,13 @@
 					@foreach (var ing in order.OrderItems)
 					{
 						<li>
+							<span>
+								@{
+						var path = "/Images/" + ing.FoodItem.ImagePath;
+						<img src="@path" alt="@ing.FoodItemName" />
+								}
+							</span>
+
 							<span>@ing.FoodItemName</span>
 
 							@if (!(ing.FoodItem.CategoryName.Equals(Category.BEVERAGES) || ing.FoodItem.CategoryName.Equals(Category.DESSERTS) || ing.FoodItem.CategoryName.Equals(Category.SIDES)))

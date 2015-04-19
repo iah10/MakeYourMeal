@@ -84,7 +84,6 @@
 	}
 </div>
 
-
 <div id="drag-container">
 	<ul id="ingredients" class="media-list media-middle text-center">
 		@foreach (var ing in Model.Ingredients)
@@ -134,8 +133,6 @@
 				viewModel.numberOfNoti(viewModel.numberOfNoti() + 1);
 			});
 		});
-
-
 
 		//get config data
 		function config(fixed, items) {
@@ -197,7 +194,6 @@
 			opacity: 0.75,
 			containment: "document"
 		});
-
 
 		$("#droppable-6").droppable({
 			accept: "#ingredients li",
