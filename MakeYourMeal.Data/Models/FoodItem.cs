@@ -25,6 +25,8 @@ namespace MakeYourMeal.Data.Models
 		[Required]
 		public string ImagePath { get; set; }
 
+		public int TotalCalories { get; set; }
+
 		public virtual Category Category { get; set; }
 
 		public virtual ICollection<FoodItemHasIngredient> FoodItemHasIngredients { get; set; }

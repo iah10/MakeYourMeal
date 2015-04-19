@@ -248,6 +248,7 @@
     <Content Include="Images\background-light.jpg" />
     <Content Include="Images\background.jpg" />
     <Content Include="Images\BigDeluxe.png" />
+    <Content Include="Images\cart.png" />
     <Content Include="Images\cherry-shake.png" />
     <Content Include="Images\ChickenFilletBurger.png" />
     <Content Include="Images\Fries.png" />

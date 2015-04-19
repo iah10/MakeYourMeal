@@ -50,7 +50,7 @@ namespace MakeYourMeal.Controllers
         public ActionResult CallAdmin()
         {
             var tableNumber = OrderService.GetCurrentTableNumber(this.HttpContext);
-            AdminHub.Value.Clients.All.callreceived(tableNumber);
+			AdminHub.Value.Clients.All.callReceived(tableNumber);
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
@@ -81,7 +81,8 @@ namespace MakeYourMeal.Controllers
 						{
 							newItem.ExtraIngredients.Add(_ingredientService.FindIngredient(ingredient));
 						}
-					}else if(key.Equals("without[]"))
+					}
+					else if(key.Equals("without[]"))
 					{
 						without = Request.Form[key];
 						string[] array = without.Split(',');

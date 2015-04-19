@@ -46,18 +46,18 @@ $(function () {
 	var hub = $.connection.adminHub;
 
 	//let knouckout do it's magic
-	ko.applyBindings(viewModel, document.getElementById("#tbOrder"));
+	ko.applyBindings(viewModel);
 
 	//order receivied 
+	hub.client.callReceived = function (tableNumber) {
+		console.log('hello from ' + tableNumber);
+		toastr.info("Call from table" + tableNumber);
+	}
+
 	hub.client.orderReceived = function (order) {
 		toastr.info("New order received!");
 		viewModel.Orders.unshift(new CartApp.Order(order));
 	}
-
-	hub.client.callreceived = function (tablenumber) {
-	    toastr.info("Call from " + tablenumber +  " received!");
-	}
-
 
 	//start real time connection
 	$.connection.hub.start();

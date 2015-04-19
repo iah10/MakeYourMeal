@@ -67,6 +67,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 			{
 				Name = "Chicken Fillet",
 				CategoryName = Category.CHICKEN,
+				TotalCalories = 340,
 				ImagePath = "ChickenFilletBurger.png",
 				Price = new decimal(11.5)
 			};
@@ -137,6 +138,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				Name = "Big Deluxe",
 				CategoryName = Category.CHARBROILED_BURGERS,
 				ImagePath = "BigDeluxe.png",
+				TotalCalories = 440,
 				Price = new decimal(12.5)
 			};
 
@@ -240,6 +242,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 			{
 				Name = "Apple Juice",
 				CategoryName = Category.BEVERAGES,
+				TotalCalories = 120,
 				ImagePath = "apple-juice.png",
 				Price = new decimal(4)
 			};
@@ -263,6 +266,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 			{
 				Name = "Orange Juice",
 				CategoryName = Category.BEVERAGES,
+				TotalCalories = 110,
 				ImagePath = "orange-juice.png",
 				Price = new decimal(4)
 			};
@@ -286,6 +290,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 			{
 				Name = "Cherry Shake",
 				CategoryName = Category.DESSERTS,
+				TotalCalories = 240,
 				ImagePath = "cherry-shake.png",
 				Price = new decimal(8)
 			};
