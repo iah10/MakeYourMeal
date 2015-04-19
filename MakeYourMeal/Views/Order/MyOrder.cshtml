@@ -74,7 +74,7 @@
 				</ul>
 
 				<button class="btn-default">
-					@if (order.OrderState.State.Equals(OrderState.NEW_ORDER))
+					@if (order.OrderState.State.Equals(OrderState.NEW_ORDER) && order.OrderItems.Count > 0)
 					{
 						@Html.ActionLink("Commit Order", "CommitCurrentOrder")
 					}
