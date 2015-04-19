@@ -4,10 +4,6 @@
 	padding-right: 0;
 }
 
-.collapse {
-	/*background-color: rgb(140,140,140) ;
-	border-color: rgb(200, 200, 200) ;*/
-}
 /* Override the default bootstrap behavior where horizontal description lists 
    will truncate terms that are too long to fit in the left column 
 */
@@ -468,11 +464,12 @@ html {
 }
 
 .myorder-page {
+	height: 100%;
+	background-size: cover;
 	overflow-y: visible;
 	background: #b3817b !important;
 	background-image: url("/Images/zenbg-6.png") !important;
 	background-repeat: repeat !important;
-	height: 100%;
 }
 
 .myorder-page-container {
