@@ -46,7 +46,7 @@ $(function () {
 	var hub = $.connection.adminHub;
 
 	//let knouckout do it's magic
-	ko.applyBindings(viewModel);
+	ko.applyBindings(viewModel, document.getElementById("#tbOrder"));
 
 	//order receivied 
 	hub.client.orderReceived = function (order) {
