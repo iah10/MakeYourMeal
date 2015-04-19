@@ -7,11 +7,11 @@
 }
 <body class="myorder-page">
 	<div class="myorder-page-container">
-		<h1>My Orders</h1>
+		<h1>My Order</h1>
 
 		@foreach (var order in Model)
 		{
-			<div class="sheet-container">
+			<div id="container-id" class="sheet-container">
 
 				<div>
 					<dl class="dl-horizontal ">
@@ -41,9 +41,7 @@
 					</dl>
 				</div>
 
-				<h3> Order @i</h3>
-
-				<ul>
+				<ul id="items-list">
 					@foreach (var ing in order.OrderItems)
 					{
 						<li>
@@ -51,7 +49,8 @@
 
 							@if (!(ing.FoodItem.CategoryName.Equals(Category.BEVERAGES) || ing.FoodItem.CategoryName.Equals(Category.DESSERTS) || ing.FoodItem.CategoryName.Equals(Category.SIDES)))
 							{
-								if(ing.ExtraIngredients.Count!=0){
+								if (ing.ExtraIngredients.Count != 0)
+								{
 									<p>
 										+ Extra(
 										@foreach (var change in @ing.ExtraIngredients)
@@ -61,14 +60,15 @@
 									</p>
 								}
 
-								if(ing.WithoutIngredients.Count!=0){
-								<p>
-									- Without(
-									@foreach (var change in @ing.WithoutIngredients)
-									{
-										<span>@change.Name</span>
-									})
-								</p>
+								if (ing.WithoutIngredients.Count != 0)
+								{
+									<p>
+										- Without(
+										@foreach (var change in @ing.WithoutIngredients)
+										{
+											<span>@change.Name</span>
+										})
+									</p>
 								}
 							}
 
@@ -136,8 +136,10 @@
 				viewModel.numberOfNoti(count);
 			}, "json");
 
-
 			$('.delete').click(function () {
+				//if ($("#items-list li").length == 0) {
+				//	$("#container-id").remove();
+				//}
 				$(this).parent().parent().remove();
 				$.post(this.href, function (result) {
 					viewModel.numberOfNoti(viewModel.numberOfNoti() - 1);
