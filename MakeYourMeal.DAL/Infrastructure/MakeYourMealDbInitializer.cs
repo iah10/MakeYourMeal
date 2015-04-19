@@ -314,6 +314,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 			{
 				Name = "Fries",
 				CategoryName = Category.SIDES,
+				TotalCalories = 200,
 				ImagePath = "Fries.png",
 				Price = new decimal(5)
 			};
