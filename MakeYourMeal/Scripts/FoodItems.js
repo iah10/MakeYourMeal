@@ -9,6 +9,7 @@ var viewModel;
 $(function () {
 
 	//init knoukcout
+	toastr.options.preventDuplicates = true;
 	viewModel = new NotiApp.Noti();
 
 	//let knouckout do it's magic
@@ -75,8 +76,8 @@ $(function () {
 	}, "json");
 
 	$("#callWaiter").click(function () {
-	    $.get("/Order/CallAdmin", function (request) {
-	        console.log('akal');
+		$.get("/Order/CallAdmin", function (request) {
+				toastr.info("We Are Coming To Help !");
 	    }, "json");
 	});
 });

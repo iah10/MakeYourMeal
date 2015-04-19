@@ -139,7 +139,7 @@ namespace MakeYourMeal.Service.Services
 			var order =
 				_orderRepository.GetMany(
 					o =>
-						((o.OrderState.State.Equals(OrderState.COMITED_STATE) || o.OrderState.State.Equals(OrderState.NEW_ORDER)) &&
+						((o.OrderState.State.Equals(OrderState.NEW_ORDER) || o.OrderState.State.Equals(OrderState.NEW_ORDER)) &&
 						o.TableNumber== tableNumber) && o.OrderItems.Count > 0);
 			return order.OrderByDescending(o => o.OrderState.State);
 		}
