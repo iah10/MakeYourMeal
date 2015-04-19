@@ -54,6 +54,11 @@ $(function () {
 		viewModel.Orders.unshift(new CartApp.Order(order));
 	}
 
+	hub.client.callreceived = function (tablenumber) {
+	    toastr.info("Call from " + tablenumber +  " received!");
+	}
+
+
 	//start real time connection
 	$.connection.hub.start();
 

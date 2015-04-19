@@ -73,4 +73,10 @@ $(function () {
 	$.get("/Order/GetCountOfCurrentOrder", function (count) {
 		viewModel.numberOfNoti(count);
 	}, "json");
+
+	$("#callWaiter").click(function () {
+	    $.get("/Order/CallAdmin", function (request) {
+	        console.log('akal');
+	    }, "json");
+	});
 });

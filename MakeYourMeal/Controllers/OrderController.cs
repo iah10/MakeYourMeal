@@ -47,6 +47,13 @@ namespace MakeYourMeal.Controllers
 				}, JsonRequestBehavior.AllowGet);
 		}
 
+        public ActionResult CallAdmin()
+        {
+            var tableNumber = OrderService.GetCurrentTableNumber(this.HttpContext);
+            AdminHub.Value.Clients.All.callreceived(tableNumber);
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
 		public ActionResult AddOrderItem(string id)
 		{
 			var ing = Request.Form;
