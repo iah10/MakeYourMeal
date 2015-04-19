@@ -505,7 +505,7 @@ html {
 .myorder-page-container {
 	color: #fff;
 	padding: 4%;
-	width: 400px;
+	width: 500px;
 }
 
 	.myorder-page-container h1 {
@@ -599,5 +599,9 @@ html {
 
 .view-order-font span{
 	line-height: 50px;
+}
+
+.delete-float {
+	float: right;
 }
 /******************************************************/

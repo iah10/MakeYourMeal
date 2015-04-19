@@ -32,7 +32,7 @@
 						</dd>
 
 						<dt>
-							@Html.DisplayNameFor(o => o.TotalCost)
+							@Html.DisplayNameFor(o => o.TotalCost) <text> &nbsp;(in L.P.)</text>
 						</dt>
 
 						<dd data-bind="text: TotalCost() > -1 ? TotalCost(): @order.TotalCost">
@@ -80,7 +80,7 @@
 
 							@if (order.OrderState.State.Equals(OrderState.NEW_ORDER))
 							{
-								<span>@Html.ActionLink("Delete", "DeleteOrderItem", new { id = ing.OrderItemId }, new { @class = "btn delete btn-default", @role = "button" })</span>
+								<span>@Html.ActionLink("Delete", "DeleteOrderItem", new { id = ing.OrderItemId }, new { @class = "btn delete btn-default delete-float", @role = "button" })</span>
 							}
 						</li>
 					}
@@ -98,7 +98,7 @@
 
 	<div class="footer">
 		<p>
-			@Html.ActionLink("Back to List", "Index", "FoodItems")
+			@Html.ActionLink("Back to List", "Index", "FoodItems", new { @class = "btn btn-default", @role = "button" })
 		</p>
 	</div>
 </body>
