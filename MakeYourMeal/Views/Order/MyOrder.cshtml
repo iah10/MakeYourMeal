@@ -144,10 +144,10 @@
 			}, "json");
 
 			$('.delete').click(function () {
-				//if ($("#items-list li").length == 0) {
-				//	$("#container-id").remove();
-				//}
 				$(this).parent().parent().remove();
+				if ($("#items-list li").length === 0) {
+					$("#container-id").remove();
+				}
 				//viewModel.TotalCost(viewModel.TotalCost() - 1);
 				$.post(this.href, function (result) {
 					viewModel.TotalCost(result);
