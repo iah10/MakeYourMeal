@@ -24,6 +24,10 @@ textarea {
 	float: Left;
 }
 
+.floatR{
+	float: right;
+}
+
 .clearB {
 	clear: both;
 }
@@ -423,8 +427,8 @@ html {
 .badge-notify {
 	background: red;
 	position: absolute;
-	top: 10px;
-	left: 37px;
+	top: 5px;
+	left: 205px;
 }
 
 .food-items-list {
@@ -570,18 +574,23 @@ html {
 	color: #000;
 }
 
-.small-font{
-	font-size: 0.8em;
-	text-decoration: none;
-}
-
 .bigger-font{
 	font-size: 1.8em;
+	padding-top: 20px;
 }
 
 .music-font{
 	font-style: italic;
 	font-size: 1.3em;
 	padding-top: 20px;
+}
+
+.view-order-font{
+	font-size: 1.8em;
+	padding-top: 5px;
+}
+
+.view-order-font span{
+	line-height: 50px;
 }
 /******************************************************/

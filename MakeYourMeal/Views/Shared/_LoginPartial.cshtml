@@ -22,15 +22,14 @@ else
 				<div class="navbar-header">
 					@Html.ActionLink("Choose Your Music", "Index", "FoodItems", null, new { @class = "navbar-brand music-font" })
 				</div>
-				<button class="btn btn-default btn-lg btn-link my-order" style="font-size: 25px;">
-					<span>
-						@Html.ActionLink(" ", "MyOrder", "Order", routeValues: null, htmlAttributes:
-							  new { @class = "glyphicon glyphicon-shopping-cart" })
-					</span>
-					<span class="small-font">
-						My Order
-					</span>
-				</button>
+				<div class="floatL">
+					<a href="@Url.Action("MyOrder", "Order", null)" class="navbar-brand view-order-font floatR">
+						<span>View Order</span>
+						<img src="~/Images/cart.png" alt="My Order" width="50" height="50" class="floatL cart-image"/>
+	
+					</a>
+						@*@Html.ActionLink("View Order", "MyOrder", "Order", null, new { @class = "navbar-brand bigger-font floatR" })*@
+				</div>
 				<span data-bind="visible: numberOfNoti() >0"><span class="badge badge-notify" data-bind="text: numberOfNoti"></span></span>
 			</li>
 		</ul>
