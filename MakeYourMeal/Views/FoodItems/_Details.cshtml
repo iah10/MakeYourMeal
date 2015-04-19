@@ -69,14 +69,20 @@
 		<div class="list-group panel ingredients-style">
 			<a href="#extraIngredients" class="list-group-item list-group-item-success ingredient-list" data-toggle="collapse" style=" background-color: rgb(26, 26, 26); color : white ;">Add Ingredients</a>
 			<ul id="extraIngredients" class="collapse">
+				<li data-ing-name="Ketchup" class="media-object text-center draggable">
+					<img src="/Images/Ketchup.png" class="img-responsive center-block" alt="Ketchup">
+				</li>
 				<li data-ing-name="Mayonnaise" class="media-object text-center draggable">
 					<img src="/Images/Mayonnaise.png" class="img-responsive center-block" alt="Mayonnaise">
 				</li>
-				<li data-ing-name="Cheese" class="media-object text-center draggable">
-					<img src="/Images/Cheese.png" class="img-responsive center-block" alt="Cheese">
+				<li data-ing-name="Mustard" class="media-object text-center draggable">
+					<img src="/Images/Mustard.png" class="img-responsive center-block" alt="Mustard">
 				</li>
 				<li data-ing-name="Onion" class="media-object text-center draggable">
 					<img src="/Images/Onion.png" class="img-responsive center-block" alt="Onion">
+				</li>
+				<li data-ing-name="Cheese" class="media-object text-center draggable">
+					<img src="/Images/Cheese.png" class="img-responsive center-block" alt="Cheese">
 				</li>
 				<li data-ing-name="Tomato" class="media-object text-center draggable">
 					<img src="/Images/Tomato.png" class="img-responsive center-block" alt="Tomato">
@@ -91,7 +97,6 @@
 		</div>
 	}
 </div>
-
 
 <div id="drag-container">
 	<ul id="ingredients" class="media-list media-middle text-center">
@@ -142,8 +147,6 @@
 				viewModel.numberOfNoti(viewModel.numberOfNoti() + 1);
 			});
 		});
-
-
 
 		//get config data
 		function config(fixed, items) {
@@ -205,7 +208,6 @@
 			opacity: 0.75,
 			containment: "document"
 		});
-
 
 		$("#droppable-6").droppable({
 			accept: "#ingredients li",

@@ -251,7 +251,10 @@
     <Content Include="Images\cart.png" />
     <Content Include="Images\cherry-shake.png" />
     <Content Include="Images\ChickenFilletBurger.png" />
+    <Content Include="Images\Fries.png" />
+    <Content Include="Images\Ketchup.png" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\Mustard.png" />
     <Content Include="Images\orange-juice.png" />
     <Content Include="Images\ZenBG-10.png" />
     <Content Include="Images\ZenBG-6.png" />

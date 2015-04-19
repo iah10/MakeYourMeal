@@ -32,6 +32,8 @@ namespace MakeYourMeal.DAL.Infrastructure
 
 			CreateCherryShake(context);
 
+			CreateFries(context);
+
 			context.Commit();
 		}
 
@@ -232,7 +234,6 @@ namespace MakeYourMeal.DAL.Infrastructure
 				Position = 10
 			};
 			context.FoodItemHasIngredients.Add(bigDeluxeAndHeelBun);
-
 		}
 
 		private void CreateAppleJuice(MakeYourMealEntities context)
@@ -291,7 +292,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 				CategoryName = Category.DESSERTS,
 				TotalCalories = 240,
 				ImagePath = "cherry-shake.png",
-				Price = new decimal(4)
+				Price = new decimal(8)
 			};
 
 			context.FoodItems.Add(cherryshake);
@@ -305,6 +306,30 @@ namespace MakeYourMeal.DAL.Infrastructure
 				Position = 1
 			};
 			context.FoodItemHasIngredients.Add(cherryshakeR);
+		}
+
+		private void CreateFries(MakeYourMealEntities context)
+		{
+			FoodItem fries = new FoodItem()
+			{
+				Name = "Fries",
+				CategoryName = Category.SIDES,
+				TotalCalories = 200,
+				ImagePath = "Fries.png",
+				Price = new decimal(5)
+			};
+
+			context.FoodItems.Add(fries);
+
+			//add items ingredients
+			FoodItemHasIngredient friesR = new FoodItemHasIngredient()
+			{
+				FoodItemName = "Fries",
+				IngredientName = "Potato",
+				Quantity = 1,
+				Position = 1
+			};
+			context.FoodItemHasIngredients.Add(friesR);
 		}
 
 		private void CreateIngredients(MakeYourMealEntities context)
@@ -429,6 +454,13 @@ namespace MakeYourMeal.DAL.Infrastructure
 					AdditionalCharge = new decimal(0),
 					IsRemovable = false,
 					ImagePath = "cherry-shake.png"
+				},
+				new Ingredient()
+				{
+					Name = "Potato",
+					AdditionalCharge = new decimal(0),
+					IsRemovable = false,
+					ImagePath = "Fries.png"
 				}
 			};
 			ingredients.ForEach(ing => context.Ingredients.Add(ing));
