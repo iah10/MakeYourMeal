@@ -22,7 +22,7 @@ namespace MakeYourMeal.Service.Services
 		void CommitOrder(HttpContextBase context);
 		void AddToTotalCost(Order order, OrderItem orderItem);
 		void AddOrderItemToOrder(int orderId, OrderItem orderItem);
-		void RemoverOrderItemFromOrder(int orderId, int orderItemId);
+		decimal RemoverOrderItemFromOrder(int orderId, int orderItemId);
 		void ChangeOrderState(Order order, string state);
 		void CalculateTotalCost(Order order);
 		void EmptyOrder(int orderId);
@@ -160,11 +160,12 @@ namespace MakeYourMeal.Service.Services
 			return _orderRepository.GetById(orderId);
 		}
 
-		public void RemoverOrderItemFromOrder(int orderId, int orderItemId)
+		public decimal RemoverOrderItemFromOrder(int orderId, int orderItemId)
 		{
 			var order = GetOrderById(orderId);
 			_orderItemService.DeleteOrderItem(orderItemId);
 			CalculateTotalCost(order);
+			return order.TotalCost;
 		}
 
 		public void AddOrderItemToOrder(int orderId, OrderItem orderItem)

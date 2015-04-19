@@ -152,8 +152,8 @@ namespace MakeYourMeal.Controllers
 		public ActionResult DeleteOrderItem(int id)
 		{
 			int orderId = _orderService.GetCurrentOrderId(this.HttpContext);
-			_orderService.RemoverOrderItemFromOrder(orderId, id);
-			return Json(true, JsonRequestBehavior.AllowGet);
+			var newPrice = _orderService.RemoverOrderItemFromOrder(orderId, id);
+			return Json(newPrice, JsonRequestBehavior.AllowGet);
 		}
 
 		public ActionResult GetCountOfCurrentOrder()

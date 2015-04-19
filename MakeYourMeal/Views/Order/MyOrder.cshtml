@@ -35,8 +35,7 @@
 							@Html.DisplayNameFor(o => o.TotalCost)
 						</dt>
 
-						<dd>
-							@Html.DisplayFor(o => order.TotalCost)
+						<dd data-bind="text: TotalCost() > -1 ? TotalCost(): @order.TotalCost">
 						</dd>
 					</dl>
 				</div>
@@ -108,6 +107,7 @@
 		NotiApp.Noti = function (item) {
 			var self = this;
 			self.numberOfNoti = ko.observable(0);
+			self.TotalCost = ko.observable(-1);
 		};
 		var viewModel;
 		$(function () {
@@ -139,7 +139,9 @@
 
 			$('.delete').click(function () {
 				$(this).parent().parent().remove();
+				//viewModel.TotalCost(viewModel.TotalCost() - 1);
 				$.post(this.href, function (result) {
+					viewModel.TotalCost(result);
 					viewModel.numberOfNoti(viewModel.numberOfNoti() - 1);
 				});
 				return false;

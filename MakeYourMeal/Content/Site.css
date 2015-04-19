@@ -396,6 +396,13 @@ html {
 		-webkit-transition: all .35s ease-in-out;
 	}
 /********************************************/
+#music {
+  position: fixed;
+  top: 73%;
+  right: 15px;	
+
+}
+
 #callWaiter {
   position: fixed;
   top: 85%;
@@ -428,7 +435,7 @@ html {
 	background: red;
 	position: absolute;
 	top: 5px;
-	left: 205px;
+	left: 30px;
 }
 
 .food-items-list {
