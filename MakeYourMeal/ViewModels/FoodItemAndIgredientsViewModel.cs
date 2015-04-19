@@ -18,12 +18,16 @@ namespace MakeYourMeal.ViewModels
 			this.ImagePath = item.ImagePath;
 			this.Price = item.Price;
 			this.Ingredients = ingredients;
+			this.TotalCalories = item.TotalCalories;
 		}
 
 		public string Name { get; set; }
 
 		[Display(Name = "Category")]
 		public string CategoryName { get; set; }
+
+		[Display(Name = "Total Calories")]
+		public int TotalCalories { get; set; }
 
 		public decimal? Price { get; set; }
 
