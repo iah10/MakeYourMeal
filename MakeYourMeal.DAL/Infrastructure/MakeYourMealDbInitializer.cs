@@ -26,6 +26,12 @@ namespace MakeYourMeal.DAL.Infrastructure
 
 			CreateChickenFillet(context);
 
+			CreateOrangeJuice(context);
+
+			CreateAppleJuice(context);
+
+			CreateCherryShake(context);
+
 			context.Commit();
 		}
 
@@ -227,6 +233,75 @@ namespace MakeYourMeal.DAL.Infrastructure
 
 		}
 
+		private void CreateAppleJuice(MakeYourMealEntities context)
+		{
+			FoodItem applejuice = new FoodItem()
+			{
+				Name = "Apple Juice",
+				CategoryName = Category.BEVERAGES,
+				ImagePath = "apple-juice.png",
+				Price = new decimal(4)
+			};
+
+			context.FoodItems.Add(applejuice);
+
+			//add items ingredients
+			FoodItemHasIngredient applejuiceR = new FoodItemHasIngredient()
+			{
+				FoodItemName = "Apple Juice",
+				IngredientName = "Apple",
+				Quantity = 1,
+				Position = 1
+			};
+			context.FoodItemHasIngredients.Add(applejuiceR);
+		}
+
+		private void CreateOrangeJuice(MakeYourMealEntities context)
+		{
+			FoodItem orangejuice = new FoodItem()
+			{
+				Name = "Orange Juice",
+				CategoryName = Category.BEVERAGES,
+				ImagePath = "orange-juice.png",
+				Price = new decimal(4)
+			};
+
+			context.FoodItems.Add(orangejuice);
+
+			//add items ingredients
+			FoodItemHasIngredient orangejuiceR = new FoodItemHasIngredient()
+			{
+				FoodItemName = "Orange Juice",
+				IngredientName = "Orange",
+				Quantity = 1,
+				Position = 1
+			};
+			context.FoodItemHasIngredients.Add(orangejuiceR);
+		}
+
+		private void CreateCherryShake(MakeYourMealEntities context)
+		{
+			FoodItem cherryshake = new FoodItem()
+			{
+				Name = "Cherry Shake",
+				CategoryName = Category.DESSERTS,
+				ImagePath = "cherry-shake.png",
+				Price = new decimal(4)
+			};
+
+			context.FoodItems.Add(cherryshake);
+
+			//add items ingredients
+			FoodItemHasIngredient cherryshakeR = new FoodItemHasIngredient()
+			{
+				FoodItemName = "Cherry Shake",
+				IngredientName = "Cherry",
+				Quantity = 1,
+				Position = 1
+			};
+			context.FoodItemHasIngredients.Add(cherryshakeR);
+		}
+
 		private void CreateIngredients(MakeYourMealEntities context)
 		{
 			List<Ingredient> ingredients = new List<Ingredient>
@@ -250,7 +325,7 @@ namespace MakeYourMeal.DAL.Infrastructure
 					Name = "Pickles",
 					AdditionalCharge = new decimal(0),
 					IsRemovable = true,
-					ImagePath = "Pickels.png"
+					ImagePath = "Pickles.png"
 				},
 				new Ingredient()
 				{
@@ -328,6 +403,27 @@ namespace MakeYourMeal.DAL.Infrastructure
 					AdditionalCharge = new decimal(1),
 					IsRemovable = true,
 					ImagePath = "Turkey.jpg"
+				},
+				new Ingredient()
+				{
+					Name = "Apple",
+					AdditionalCharge = new decimal(0),
+					IsRemovable = false,
+					ImagePath = "apple-juice.png"
+				},
+				new Ingredient()
+				{
+					Name = "Orange",
+					AdditionalCharge = new decimal(0),
+					IsRemovable = false,
+					ImagePath = "orange-juice.png"
+				},
+				new Ingredient()
+				{
+					Name = "Cherry",
+					AdditionalCharge = new decimal(0),
+					IsRemovable = false,
+					ImagePath = "cherry-shake.png"
 				}
 			};
 			ingredients.ForEach(ing => context.Ingredients.Add(ing));

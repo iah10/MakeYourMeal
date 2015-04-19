@@ -73,7 +73,8 @@ textarea {
 
 #drag-container {
 	float: left;
-	padding-left: 20%;
+	padding-left: 30%;
+	margin: 0 auto;
 }
 /*********************************/
 
@@ -407,6 +408,8 @@ html {
   border-radius: 35px;
 }
 
+/**********************************************/
+
 #plate {
 	padding-left: 80px;
 	padding-right: 80px;
@@ -562,3 +565,23 @@ html {
 .fit-all{
 	height: 100%;
 }
+
+.dd-font{
+	color: #000;
+}
+
+.small-font{
+	font-size: 0.8em;
+	text-decoration: none;
+}
+
+.bigger-font{
+	font-size: 1.8em;
+}
+
+.music-font{
+	font-style: italic;
+	font-size: 1.3em;
+	padding-top: 20px;
+}
+/******************************************************/

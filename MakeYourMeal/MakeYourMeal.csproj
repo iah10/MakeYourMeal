@@ -241,14 +241,17 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
+    <Content Include="Images\apple-juice.png" />
     <Content Include="Images\adel 2.jpg" />
     <Content Include="Images\adel1.jpg" />
     <Content Include="Images\background-ing.jpg" />
     <Content Include="Images\background-light.jpg" />
     <Content Include="Images\background.jpg" />
     <Content Include="Images\BigDeluxe.png" />
+    <Content Include="Images\cherry-shake.png" />
     <Content Include="Images\ChickenFilletBurger.png" />
     <Content Include="Images\logo.png" />
+    <Content Include="Images\orange-juice.png" />
     <Content Include="Images\ZenBG-10.png" />
     <Content Include="Images\ZenBG-6.png" />
     <Content Include="Images\ZenBG-7.png" />
@@ -266,7 +269,7 @@
     <Content Include="Images\Lettuce.png" />
     <Content Include="Images\Mayonnaise.png" />
     <Content Include="Images\Onion.png" />
-    <Content Include="Images\Pickels.png" />
+    <Content Include="Images\Pickles.png" />
     <Content Include="Images\Tomato.png" />
     <Content Include="Images\Trash.png" />
     <Content Include="Images\ZenBG-1.png" />

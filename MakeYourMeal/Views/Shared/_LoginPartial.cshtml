@@ -19,10 +19,16 @@ else
 	{
 		<ul id="nav" class="nav navbar-nav navbar-right">
 			<li>
+				<div class="navbar-header">
+					@Html.ActionLink("Choose Your Music", "Index", "FoodItems", null, new { @class = "navbar-brand music-font" })
+				</div>
 				<button class="btn btn-default btn-lg btn-link my-order" style="font-size: 25px;">
 					<span>
 						@Html.ActionLink(" ", "MyOrder", "Order", routeValues: null, htmlAttributes:
 							  new { @class = "glyphicon glyphicon-shopping-cart" })
+					</span>
+					<span class="small-font">
+						My Order
 					</span>
 				</button>
 				<span data-bind="visible: numberOfNoti() >0"><span class="badge badge-notify" data-bind="text: numberOfNoti"></span></span>
