@@ -1,4 +1,18 @@
-﻿$(function () {
+﻿var NotiApp = NotiApp || {};
+
+NotiApp.Noti = function (item) {
+	var self = this;
+	self.numberOfNoti = ko.observable(0);
+};
+var viewModel;
+
+$(function () {
+
+	//init knoukcout
+	viewModel = new NotiApp.Noti();
+
+	//let knouckout do it's magic
+	ko.applyBindings(viewModel, document.getElementById("#nav"));
 
 	//load menu
 	var trigger = $('.hamburger'),
@@ -18,7 +32,8 @@
 			isClosed = true;
 		}
 	}
-	id = "drag-container"
+
+	id = "drag-container";
 	trigger.click(function () {
 		hamburgerCross();
 	});
