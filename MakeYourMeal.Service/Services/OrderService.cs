@@ -39,6 +39,7 @@ namespace MakeYourMeal.Service.Services
 		private readonly IOrderStateService _orderStateService;
 		public const string OrderSessionId = "OrderId";
 		public const string OrderSessionTableNumber = "TableNumber";
+		private static int TableNumber = 1;
 
 		public OrderService(MakeYourMealEntities dbContext)
 		{
@@ -49,7 +50,11 @@ namespace MakeYourMeal.Service.Services
 
 		public static int GetCurrentTableNumber(HttpContextBase context)
 		{
-			SetCurrentTableNumber(context, 1);
+			if (context.Session[OrderSessionTableNumber] == null)
+			{
+				SetCurrentTableNumber(context, TableNumber);
+				TableNumber++;
+			}
 			return Int32.Parse(context.Session[OrderSessionTableNumber].ToString());
 		}
 
@@ -135,7 +140,7 @@ namespace MakeYourMeal.Service.Services
 				_orderRepository.GetMany(
 					o =>
 						((o.OrderState.State.Equals(OrderState.COMITED_STATE) || o.OrderState.State.Equals(OrderState.NEW_ORDER)) &&
-						o.TableNumber== tableNumber));
+						o.TableNumber== tableNumber) && o.OrderItems.Count > 0);
 			return order.OrderByDescending(o => o.OrderState.State);
 		}
 
