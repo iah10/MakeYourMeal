@@ -49,21 +49,28 @@
 						<li>
 							<span>@ing.FoodItemName</span>
 
-							<p>
-								+ Extra(
-								@foreach (var change in @ing.ExtraIngredients)
-								{
-									<span>@change.Name</span>
-								})
-							</p>
+							@if (!(ing.FoodItem.CategoryName.Equals(Category.BEVERAGES) || ing.FoodItem.CategoryName.Equals(Category.DESSERTS) || ing.FoodItem.CategoryName.Equals(Category.SIDES)))
+							{
+								if(ing.ExtraIngredients.Count!=0){
+									<p>
+										+ Extra(
+										@foreach (var change in @ing.ExtraIngredients)
+										{
+											<span>@change.Name</span>
+										})
+									</p>
+								}
 
-							<p>
-								- Without(
-								@foreach (var change in @ing.WithoutIngredients)
-								{
-									<span>@change.Name</span>
-								})
-							</p>
+								if(ing.WithoutIngredients.Count!=0){
+								<p>
+									- Without(
+									@foreach (var change in @ing.WithoutIngredients)
+									{
+										<span>@change.Name</span>
+									})
+								</p>
+								}
+							}
 
 							@if (order.OrderState.State.Equals(OrderState.NEW_ORDER))
 							{
