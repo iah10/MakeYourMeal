@@ -242,8 +242,6 @@
     <Content Include="Content\toastr.css" />
     <Content Include="Content\toastr.min.css" />
     <Content Include="Images\apple-juice.png" />
-    <Content Include="Images\adel 2.jpg" />
-    <Content Include="Images\adel1.jpg" />
     <Content Include="Images\background-ing.jpg" />
     <Content Include="Images\background-light.jpg" />
     <Content Include="Images\background.jpg" />
